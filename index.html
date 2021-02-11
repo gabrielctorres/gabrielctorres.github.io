@@ -5,22 +5,65 @@
     <title>Gabriel Torres</title>
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fira+Code:wght@400;700&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/index.css">
-    
+    <link rel="stylesheet" href="css/componentes/section.css">
+    <link rel="stylesheet" href="css/componentes/header.css">
+    <link rel="stylesheet" href="css/componentes/title.css">
+    <link rel="stylesheet" href="css/componentes/subtitle.css">
+    <link rel="stylesheet" href="css/componentes/action.css">
+    <link rel="stylesheet" href="css/componentes/box.css">
+    <link rel="stylesheet" href="css/componentes/button.css">
 </head>
 <body>
-    <header>   
-        <h1>GABRIE TORRES</h1>
+    <header class="header">   
+        
+        <h1 class="title">GT</h1>
+
         <nav>
-            <a href="" lang="en">Skills</a>
-            <a href="">Projetos</a>
-            <a href="">Sobre</a>
-            <a href="">Contatos</a>
-            <a id ="button_download"href="" lang="en">Download CV</a>
+            <a class="action" href="">Projetos</a>
+            <a class="action" href="" lang="en">Skills</a>
+            <a class="action" href="">Sobre</a>
+            <a class="action" href="">Contatos</a>
+            <a class ="button"href="" lang="en">Download CV</a>
         </nav>
     </header>
+    <section class="section">
+        <h2 class="subtitle">Projetos</h2>
+        <div class = "box">
+            <img class="Imagem" src="assets/img/Imagem_Arcade.png" alt="">      
+            <div>
+                <h3 class="text">Battle Royale 2D</h3> 
+                <h3 class="text_area">Um jogo desenvolvido em grupo no segundo semestre da faculdade onde a ideia era desenvolver para um arcade, e meu grupo tivemos a ideia de fazer um battle royale 2D, onde cada jogador nasce em um ponto da ilha e precisa coletar as armas e derrotar o outro antes do gás fechar totalmente</h3>
+            </div>   
+            <div id="buttons">
+                <a class="button" href="">Jogar</a>
+                <a class="button" href="">Codigo</a>  
+            </div>      
+        </div>
+        <div class = "box">
+            <img class="Imagem" src="assets/img/Imagem_Nave.png" alt="">      
+            <div>
+                <h3 class="text">Bullet Hell</h3> 
+                <h3 class="text_area">Esse projeto foi desenvolvido por mim e um amigo que fez as artes, ele foi um desafio para mim mesmo, a ideia era ver se eu conseguia desenvolver um projeto jogavel no periodo de ferias da faculdade.</h3>
+            </div>   
+            <div id="buttons">
+                <a class="button" href="">Jogar</a>
+                <a class="button" href="">Codigo</a>  
+            </div>      
+        </div>
+        <div class = "box">
+            <img class="Imagem" src="assets/img/Imagem_Adventure.png" alt="">      
+            <div>
+                <h3 class="text">Incremental Game</h3> 
+                <h3 class="text_area">Desenvolvido no quarto semestre da faculdade, o projeto precisava ser para mobile e educativo então eu e meu grupo tivemos a ideia de ensinar a historia em um jogo idle onde o jogador vai passar por cada parte da pré-historia do período paleolítico ate a idade dos metais.</h3>
+            </div>   
+            <div id="buttons">
+                <a class="button" href="">Jogar</a>
+                <a class="button" href="">Codigo</a>  
+            </div>      
+        </div>
+    </section>
 </body>
 </html>
