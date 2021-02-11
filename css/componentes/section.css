@@ -1,12 +1,15 @@
-.section{ 
+.section_projeto{ 
     justify-content: center;   
     background-color:#1F2833 ;      
     margin-left: 0px;    
     border-bottom: 10px solid #000;
 }
-.section .subtitle{
+.section_projeto .subtitle{
     font-family: "Bebas Neue";
     color: white;
     font-size: 96px;
-    margin-left: 40%;
+    margin-left: 46%;
+}
+.section_skills{
+    background-color:#45A29E;
 }
