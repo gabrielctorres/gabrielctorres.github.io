@@ -1,79 +1,107 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
-    <title>Gabriel Torres</title>
-
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fira+Code:wght@400;700&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/componentes/section.css">
-    <link rel="stylesheet" href="css/componentes/header.css">
-    <link rel="stylesheet" href="css/componentes/title.css">
-    <link rel="stylesheet" href="css/componentes/subtitle.css">
-    <link rel="stylesheet" href="css/componentes/action.css">
-    <link rel="stylesheet" href="css/componentes/box.css">
-    <link rel="stylesheet" href="css/componentes/button.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gabriel Torres | Game Developer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
-    <header class="header">   
-        
-        <h1 class="title">GT</h1>
-
-        <nav>
-            <a class="action" href="">Projetos</a>
-            <a class="action" href="" lang="en">Skills</a>
-            <a class="action" href="">Sobre</a>
-            <a class="action" href="">Contatos</a>
-            <a class ="button"href="" lang="en">Download CV</a>
-        </nav>
+    <header>
+        <div class="container">
+            <div class="logo">Gabriel Torres</div>
+            <nav>
+                <a href="https://github.com/" target="_blank" class="icon-button" aria-label="GitHub">
+                    <img src="img/icons/github.svg" alt="GitHub">
+                </a>
+                <a href="https://linkedin.com/" target="_blank" class="icon-button" aria-label="LinkedIn">
+                    <img src="img/icons/linkedin.svg" alt="LinkedIn">
+                </a>
+                <a href="img/resume.pdf" target="_blank" class="resume-button">Currículo</a>
+            </nav>
+        </div>
     </header>
-    <section class="section_projeto">
-        <h2 class="subtitle">Projetos</h2>
-            <div class = "box">
-                <img class="Imagem" src="assets/img/Imagem_Arcade.png" alt="">      
-                <div>
-                    <h3 class="text">Battle Royale 2D</h3> 
-                    <h3 class="text_area">Um jogo desenvolvido em grupo no segundo semestre da faculdade onde a ideia era desenvolver para um arcade, e meu grupo tivemos a ideia de fazer um battle royale 2D, onde cada jogador nasce em um ponto da ilha e precisa coletar as armas e derrotar o outro antes do gás fechar totalmente</h3>
-                </div>   
-                <div id="buttons">                   
-                    <a class="button" href="https://github.com/gabrielctorres/ArcadeRoyale">Codigo</a>  
-                </div>      
-            </div>
-            <div class = "box">
-                <img class="Imagem" src="assets/img/Imagem_Nave.png" alt="">      
-                <div>
-                    <h3 class="text">Bullet Hell</h3> 
-                    <h3 class="text_area">Esse projeto foi desenvolvido por mim e um amigo que fez as artes, ele foi um desafio para mim mesmo, a ideia era ver se eu conseguia desenvolver um projeto jogavel no periodo de ferias da faculdade.</h3>
-                </div>   
-                <div id="buttons">
-                    <a class="button" href="https://gabrieltorres.itch.io/nave">Jogar</a>
-                    <a class="button" href="https://github.com/gabrielctorres/Jogo-da-Nave">Codigo</a>  
-                </div>      
-            </div>
-            <div class = "box">
-                <img class="Imagem" src="assets/img/Imagem_Adventure.png" alt="">      
-                <div>
-                    <h3 class="text">Incremental Game</h3> 
-                    <h3 class="text_area">Desenvolvido no quarto semestre da faculdade, o projeto precisava ser para mobile e educativo então eu e meu grupo tivemos a ideia de ensinar a historia em um jogo idle onde o jogador vai passar por cada parte da pré-historia do período paleolítico ate a idade dos metais.</h3>
-                </div>   
-                <div id="buttons">
-                    <a class="button" href="https://gabrieltorres.itch.io/adventure-evolution">Jogar</a>
-                    <a class="button" href="https://github.com/gabrielctorres/AdventureEvolution">Codigo</a>  
-                </div>      
-            </div>
-            <div class = "box">
-                <img class="Imagem" src="assets/img/Imagem_Feriados.png" alt="">      
-                <div>
-                    <h3 class="text">Tower defense</h3> 
-                    <h3 class="text_area">Esse jogo foi desenvolvido para a game jam LIVRE NOEL JAM feito pela Gamux, em stream junto com o meu chat, eles podiam adicionar mecânicas aleatórias e votaram na ideia do jogo baseado em um dos temas da jam que era UM CLÁSSICO DIFERENTE, e assim foi desenvolvido esse tower defense ao contrario onde você controla a wave contra as torres.</h3>
-                </div>   
-                <div id="buttons">
-                    <a class="button" href="https://gabrieltorres.itch.io/guerradosferiados">Jogar</a>
-                    <a class="button" href="https://github.com/gabrielctorres/GuerradosFeriados">Codigo</a>  
-                </div>      
-            </div>
 
+    <main>
+        <section id="hero">
+            <div class="container">
+                <h1></h1> <!-- Elemento vazio para o efeito -->
+                <p class="subtitle">Desenvolvedor de Jogos</p>
+                <a href="#projects" class="cta-button">Ver Projetos</a>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <h2 class="section-title">Sobre Mim</h2>
+                <div class="about-content">
+                    <div class="about-image-container">
+                        <img src="https://placehold.co/400x400/0A1A2F/60A5FA?text=Sua+Foto+Aqui" alt="Gabriel Torres"
+                            class="profile-pic">
+                    </div>
+                    <div class="about-text">
+                        <h3>Prazer em conhecê-lo!</h3>
+                        <p>
+                            Sou um <strong>programador de jogos</strong> buscando <strong>oportunidades pra crescer na
+                                área</strong>
+                            enquanto desenvolvo meu próprio jogo.
+                        </p>
+                        <p>
+                            Sou <strong>super criativo</strong> e estou sempre tendo <strong>novas ideias</strong>
+                            (sério, tenho muitos documentos de jogos no meu Drive) e <strong>adoro escrever código e
+                                criar jogos</strong>.
+                        </p>
+                        <p>
+                            Essa área me cativou desde que eu tinha 13 anos <strong>criando meus servidores de
+                                Minecraft</strong>
+                            e tentando programar plugins em <strong>Java</strong> (não deu muito certo), até que
+                            descobri a <strong>Unity</strong>
+                            e me encontrei de vez na programação e na área de games.
+                        </p>
+                        <p>
+                            Se quiser ver meus projetos, dá uma olhada abaixo e, se curtir,
+                            ajuda lá adicionando <strong><em>Playground Rumble</em> na sua wishlist da Steam!</strong>
+                        </p>
+                        <h4>Principais Ferramentas e Tecnologias:</h4>
+                        <ul class="skills-list">
+                            <li>Unity</li>
+                            <li>C#</li>
+                            <li>Git</li>
+                            <li>Aseprite</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <div class="container">
+                <h2 class="section-title">Meus Projetos</h2>
+                <div class="project-grid">
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© Gabriel Torres - <span id="currentYear"></span></p>
+            <div class="social-links-footer">
+                <a href="https://github.com/" target="_blank" class="icon-button" aria-label="GitHub">
+                    <img src="img/icons/github.svg" alt="GitHub">
+                </a>
+                <a href="https://linkedin.com/" target="_blank" class="icon-button" aria-label="LinkedIn">
+                    <img src="img/icons/linkedin.svg" alt="LinkedIn">
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/data.js"></script>
+    <script src="js/script.js"></script>
 </body>
+
 </html>

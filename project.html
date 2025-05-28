@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do Projeto</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div class="logo"><a href="index.html" style="color: var(--accent-color);">Gabriel Torres</a></div>
+            <nav>
+                <a href="https://github.com/" target="_blank" class="icon-button" aria-label="GitHub">
+                    <img src="img/icons/github.svg" alt="GitHub">
+                </a>
+                <a href="https://linkedin.com/" target="_blank" class="icon-button" aria-label="LinkedIn">
+                    <img src="img/icons/linkedin.svg" alt="LinkedIn">
+                </a>
+                <a href="img/resume.pdf" target="_blank" class="resume-button">Currículo</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="project-detail-page">
+        <div class="container">
+            <div class="project-detail-header">
+                <a href="index.html" class="back-button">&larr; Voltar para Projetos</a>
+                <h1 id="project-title-detail">Carregando Projeto...</h1>
+                <p class="project-meta-detail">
+                    <span id="project-date-detail"></span>
+                </p>
+            </div>
+
+            <img id="project-image-detail" src="https://placehold.co/800x500/0A1A2F/60A5FA?text=Carregando+Imagem"
+                alt="Imagem do Projeto" class="project-main-image">
+
+            <div class="project-actions">
+                <a href="#" id="project-github-link" class="action-button" target="_blank">
+                    <img src="assets/icons/github.svg" alt="GitHub">
+                    <span>Código no GitHub</span>
+                </a>
+                <a href="#" id="project-play-link" class="action-button play-button" target="_blank">
+                    <img src="assets/icons/play.svg" alt="Play">
+                    <span>Jogar</span>
+                </a>
+            </div>
+
+            <div id="project-story-content" class="project-story">
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© Gabriel Torres - <span id="currentYear"></span></p>
+        </div>
+    </footer>
+
+    <script src="js/data.js"></script>
+    <script src="js/project-detail.js"></script>
+</body>
+
+</html>
