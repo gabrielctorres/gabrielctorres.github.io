@@ -10,6 +10,17 @@
     --text-on-accent: #FFFFFF;
     --border-color: #1E3A5F;
 
+    /* Cores para o gradiente do card de projeto atual */
+    --gradient-color-1: #28c074;
+    /* Verde */
+    --gradient-color-2: #ff417d;
+    /* Rosa */
+    --gradient-color-1-rgb: 40, 192, 116;
+    /* Verde RGB */
+    --gradient-color-2-rgb: 255, 65, 125;
+    /* Rosa RGB */
+
+
     /* 🏷️ Tags - Evento */
     --tag-event: #ea8808;
     /* Amarelo Evento */
@@ -25,7 +36,7 @@
     /* Roxo */
     --tag-platformer: #9333ea;
     /* Roxo mais escuro */
-
+    --tag-roguelike: #9333ea;
     /* 🏷️ Tags - Engine */
     --tag-unity: #f5f5f5;
 
@@ -77,6 +88,8 @@ a:hover {
     width: 90%;
     max-width: var(--container-width);
     margin: 0 auto;
+    padding: 0 15px;
+    /* Adicionado padding lateral ao container */
 }
 
 /* ✨ Efeitos */
@@ -92,10 +105,27 @@ a:hover {
     }
 }
 
+/* Animação de brilho pulsante para a borda do projeto em destaque */
+@keyframes pulse-border-glow {
+    0% {
+        box-shadow: 0 0 12px rgba(var(--gradient-color-1-rgb), 0.6), 0 0 18px rgba(var(--gradient-color-2-rgb), 0.4), inset 0 0 8px rgba(0, 0, 0, 0.2);
+    }
+
+    50% {
+        box-shadow: 0 0 22px rgba(var(--gradient-color-1-rgb), 0.9), 0 0 32px rgba(var(--gradient-color-2-rgb), 0.7), inset 0 0 12px rgba(0, 0, 0, 0.3);
+    }
+
+    100% {
+        box-shadow: 0 0 12px rgba(var(--gradient-color-1-rgb), 0.6), 0 0 18px rgba(var(--gradient-color-2-rgb), 0.4), inset 0 0 8px rgba(0, 0, 0, 0.2);
+    }
+}
+
+
 /* 🔥 Hero Section */
 #hero {
     background: linear-gradient(rgba(3, 6, 13, 0.85), rgba(3, 6, 13, 0.98)),
-        url('img/background.png') no-repeat center/cover;
+        url('../img/background.png') no-repeat center/cover;
+    /* Ajuste o caminho se necessário */
     min-height: 80vh;
     display: flex;
     align-items: center;
@@ -110,6 +140,8 @@ a:hover {
     border-right: 2px solid var(--accent-color);
     animation: blink-caret 0.75s step-end infinite;
     font-weight: 700;
+    color: var(--text-color);
+    /* Garante que o H1 seja branco */
 }
 
 #hero .subtitle {
@@ -162,31 +194,55 @@ header nav {
 }
 
 header nav .icon-button img {
-    width: 32px;
-    height: 32px;
+    width: 40px;
+    height: 40px;
+    transition: all 0.3s ease;
     filter: var(--icon-filter-default);
-    transition: filter 0.3s ease, transform 0.3s ease;
 }
 
 header nav .icon-button:hover img {
-    filter: var(--icon-filter-hover);
-    transform: scale(1.1);
+    transform: scale(1.15) rotate(5deg);
+    filter: drop-shadow(0 0 5px var(--accent-color));
 }
 
+
 header nav .resume-button {
-    padding: 10px 20px;
+    padding: 12px 25px;
     background-color: var(--accent-color);
     color: var(--text-on-accent);
     border-radius: var(--border-radius);
     font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;
+    transition: all 0.3s ease;
+    font-size: 1.1rem;
+    /* Adicionado para consistência */
+    animation: pulse 2s infinite;
+    /* Adicionado para consistência */
 }
 
 header nav .resume-button:hover {
     background-color: var(--accent-hover-color);
-    transform: translateY(-2px);
+    transform: translateY(-5px);
+    /* Adicionado para consistência */
+    box-shadow: 0 5px 15px rgba(96, 165, 250, 0.4);
+    /* Adicionado para consistência */
 }
+
+/* Animação pulsante */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
 
 /* 🧠 Section Titles */
 .section-title {
@@ -240,6 +296,12 @@ header nav .resume-button:hover {
     color: var(--text-color);
 }
 
+.about-text p strong em {
+    /* Para o Playground Rumble na Steam */
+    color: var(--accent-color);
+    font-style: normal;
+}
+
 .about-text h4 {
     font-size: 1.3rem;
     color: var(--accent-color);
@@ -262,14 +324,124 @@ header nav .resume-button:hover {
     font-size: 0.9rem;
 }
 
-/* 🎨 Projects */
+/* ⭐ Seção Projeto Atual */
+#current-project {
+    padding: var(--section-padding);
+    background-color: var(--bg-color);
+}
+
+.current-project-card {
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    padding: 25px;
+    position: relative;
+    border: 5px solid transparent;
+    border-image-slice: 1;
+    border-image-source: linear-gradient(to right, var(--gradient-color-1), var(--gradient-color-2));
+    /* box-shadow: 0 8px 25px rgba(0,0,0,0.4); REMOVIDO para dar lugar à animação */
+    overflow: hidden;
+    animation: pulse-border-glow 3s ease-in-out infinite;
+    /* ANIMAÇÃO DA BORDA */
+}
+
+.current-project-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    align-items: center;
+}
+
+.current-project-info {
+    flex: 1 1 55%;
+    min-width: 300px;
+}
+
+.current-project-info h3 {
+    font-size: 2.2rem;
+    color: var(--text-color);
+    margin-bottom: 10px;
+}
+
+.current-project-info .status {
+    display: inline-block;
+    background-color: var(--gradient-color-1);
+    color: var(--bg-color);
+    padding: 5px 12px;
+    border-radius: var(--border-radius);
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+.current-project-info .description {
+    font-size: 1rem;
+    color: var(--text-color-secondary);
+    margin-bottom: 25px;
+    line-height: 1.7;
+}
+
+.current-project-media {
+    flex: 1 1 40%;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.current-project-image {
+    width: 100%;
+    border-radius: var(--border-radius);
+    border: 2px solid var(--border-color);
+}
+
+.steam-widget-container {
+    width: 100%;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+}
+
+.steam-widget-container iframe {
+    display: block;
+    border-radius: calc(var(--border-radius) - 2px);
+}
+
+.steam-wishlist-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 25px;
+    background-image: linear-gradient(to right, var(--gradient-color-1), var(--gradient-color-2));
+    color: var(--text-color);
+    border: none;
+    font-weight: 600;
+    text-transform: uppercase;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    /* Adicionada transição */
+}
+
+.steam-wishlist-button:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+    color: var(--text-color);
+}
+
+.steam-icon-button {
+    width: 24px;
+    height: 24px;
+    filter: brightness(0) invert(1);
+}
+
+
+/* 🎨 Projetos (Grid) */
 #projects {
     padding: var(--section-padding);
 }
 
 .project-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    /* Reduzido de 340px para 300px */
     gap: 30px;
 }
 
@@ -281,7 +453,8 @@ header nav .resume-button:hover {
     flex-direction: column;
     border: 1px solid var(--border-color);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    cursor: pointer;
 }
 
 .project-card:hover {
@@ -292,7 +465,8 @@ header nav .resume-button:hover {
 
 .project-card .project-image {
     width: 100%;
-    height: 220px;
+    height: 200px;
+    /* Ligeiramente reduzido para acompanhar o card menor */
     object-fit: cover;
     object-position: center;
     display: block;
@@ -301,28 +475,33 @@ header nav .resume-button:hover {
 }
 
 .card-content {
-    padding: 20px;
+    padding: 18px;
+    /* Ligeiramente reduzido */
     display: flex;
     flex-direction: column;
     flex-grow: 1;
 }
 
 .card-content h2 {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
+    font-size: 1.4rem;
+    /* Ligeiramente reduzido */
+    margin-bottom: 8px;
     color: var(--text-color);
 }
 
 .card-content .project-date {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
+    /* Ligeiramente reduzido */
     color: var(--accent-color);
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     font-weight: 600;
 }
 
 .card-content p {
+    font-size: 0.9rem;
+    /* Ligeiramente reduzido */
     color: var(--text-color-secondary);
-    margin-bottom: 15px;
+    margin-bottom: 12px;
     flex-grow: 1;
 }
 
@@ -330,65 +509,52 @@ header nav .resume-button:hover {
 .project-tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 10px;
+    gap: 6px;
+    /* Ligeiramente reduzido */
+    margin-bottom: 8px;
 }
 
 .project-tag {
-    padding: 4px 10px;
+    padding: 3px 8px;
+    /* Ligeiramente reduzido */
     border-radius: var(--border-radius);
-    font-size: 0.75rem;
+    font-size: 0.7rem;
+    /* Ligeiramente reduzido */
     font-weight: 600;
     text-transform: uppercase;
     color: var(--text-on-accent);
 }
 
-/* 🔸 Categoria: Local */
-.project-tag.Local {
-    background-color: var(--tag-local);
-}
-
-/* 🔵 Categoria: Plataforma */
-.project-tag.PC {
-    background-color: var(--tag-pc);
-}
-
-.project-tag.WEBGL {
-    background-color: var(--tag-webgl);
-}
-
-/* 🟣 Categoria: Estilo */
-.project-tag.TowerDefense {
-    background-color: var(--tag-tower-defense);
-}
-
-.project-tag.Platformer {
-    background-color: var(--tag-platformer);
-}
-
-/* ⚙️ Categoria: Engine */
-.project-tag.Unity {
-    background-color: var(--tag-unity);
-    color: #000;
-    /* Texto preto para fundo claro */
-}
-
-/* ⭐ Categoria: Evento */
 .project-tag.GameJam,
 .project-tag.Faculdade {
     background-color: var(--tag-event);
     color: #000;
-    /* Melhor contraste no amarelo */
 }
 
-.project-tag {
-    background-color: var(--accent-color);
-    /* fallback */
+.project-tag.PC,
+.project-tag.WEBGL {
+    background-color: var(--tag-pc);
 }
 
-/* 🗺️ Project Detail */
+.project-tag.RogueLike,
+.project-tag.TowerDefense,
+.project-tag.Platformer {
+    background-color: var(--tag-tower-defense);
+}
+
+.project-tag.Unity {
+    background-color: var(--tag-unity);
+    color: #000;
+}
+
+.project-tag.EmDesenvolvimento {
+    background-color: #dc2626;
+}
+
+/* 🗺️ Project Detail Page Styles (project.html) */
 .project-detail-page .container {
-    padding: 40px 0;
+    padding-top: 40px;
+    padding-bottom: 40px;
 }
 
 .project-detail-header {
@@ -404,7 +570,7 @@ header nav .resume-button:hover {
     padding: 8px 15px;
     border: 1px solid var(--accent-color);
     border-radius: var(--border-radius);
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .project-detail-header .back-button:hover {
@@ -415,6 +581,7 @@ header nav .resume-button:hover {
 #project-title-detail {
     font-size: 2.8rem;
     margin-bottom: 10px;
+    color: var(--text-color);
 }
 
 .project-meta-detail {
@@ -478,6 +645,7 @@ header nav .resume-button:hover {
     background-color: var(--accent-hover-color);
 }
 
+
 /* 📜 Story */
 .project-story {
     background-color: var(--card-bg);
@@ -523,6 +691,16 @@ header nav .resume-button:hover {
 .project-story li {
     margin-bottom: 8px;
 }
+
+.project-story a {
+    color: var(--accent-color);
+    text-decoration: underline;
+}
+
+.project-story a:hover {
+    color: var(--accent-hover-color);
+}
+
 
 /* 🔗 Footer */
 footer {
@@ -586,6 +764,23 @@ footer .container {
         text-align: center;
     }
 
+    .about-image-container {
+        margin-bottom: 20px;
+    }
+
+    .skills-list {
+        justify-content: center;
+    }
+
+    .current-project-content {
+        flex-direction: column;
+    }
+
+    .current-project-info,
+    .current-project-media {
+        flex-basis: 100%;
+    }
+
     .project-grid {
         grid-template-columns: 1fr;
     }
@@ -594,12 +789,21 @@ footer .container {
         flex-direction: column;
         align-items: center;
     }
+
+    #project-title-detail {
+        font-size: 2.2rem;
+    }
 }
 
 @media (max-width: 480px) {
     header nav .resume-button {
         font-size: 0.9rem;
         padding: 8px 12px;
+    }
+
+    header nav .icon-button img {
+        width: 32px;
+        height: 32px;
     }
 
     #hero h1 {
@@ -615,6 +819,20 @@ footer .container {
         font-size: 1rem;
     }
 
+    .current-project-info h3 {
+        font-size: 1.8rem;
+    }
+
+    .current-project-info .description {
+        font-size: 0.9rem;
+    }
+
+    .steam-widget-container iframe {
+        height: auto;
+        min-height: 190px;
+    }
+
+
     .project-card .project-image {
         height: 180px;
     }
@@ -624,51 +842,24 @@ footer .container {
     }
 
     #project-title-detail {
-        font-size: 2rem;
+        font-size: 1.8rem;
     }
 }
 
-/* style.css */
-header nav .icon-button img {
-    width: 40px;
-    /* Aumentado de 32px */
-    height: 40px;
-    transition: all 0.3s ease;
-}
-
-header nav .resume-button {
+.learn-more-button {
     padding: 12px 25px;
-    /* Aumentado */
-    font-size: 1.1rem;
-    transition: all 0.3s ease;
+    background-color: #ff417d;
+    color: var(--text-on-accent);
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
 }
 
-/* Novas animações */
-header nav .icon-button:hover img {
-    transform: scale(1.15) rotate(5deg);
-    filter: drop-shadow(0 0 5px var(--accent-color));
-}
-
-header nav .resume-button:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(96, 165, 250, 0.4);
-}
-
-/* Animação pulsante */
-@keyframes pulse {
-    0% {
-        transform: scale(1);
-    }
-
-    50% {
-        transform: scale(1.05);
-    }
-
-    100% {
-        transform: scale(1);
-    }
-}
-
-header nav .resume-button {
-    animation: pulse 2s infinite;
+.learn-more-button:hover {
+    background-color: #e63a70;
+    transform: translateY(-2px);
 }

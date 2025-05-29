@@ -1,4 +1,41 @@
+// data.js
 const projectsData = [
+    {
+        id: "playground-rumble",
+        title: "Playground Rumble",
+        shortDescription: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero.",
+        longDescription: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet.",
+        developmentStory: `
+        <h2>Lorem Ipsum Dolor Sit Amet</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum. Cras venenatis euismod malesuada.</p>
+        
+        <h3>Inspiração e Conceito</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi facilisis, sapien non feugiat sodales, nisl erat facilisis enim, a convallis metus nulla a nulla.</p>
+
+        <h3>Desafios de Desenvolvimento</h3>
+        <ul>
+            <li><strong>Lorem ipsum:</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+            <li><strong>Lorem ipsum:</strong> Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.</li>
+            <li><strong>Lorem ipsum:</strong> Sed nisi. Nulla quis sem at nibh elementum imperdiet.</li>
+            <li><strong>Lorem ipsum:</strong> Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta.</li>
+        </ul>
+
+        <h3>O Futuro</h3>
+        <p>Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque. Quisque porta volutpat erat.</p>
+        
+        <p><strong>Não se esqueça de adicionar à sua lista de desejos na Steam para acompanhar as novidades!</strong></p>
+        
+        <div class="steam-widget-container-detail-page" style="margin-top: 25px; margin-bottom: 15px; max-width: 646px; margin-left: auto; margin-right: auto;">
+            <iframe src="https://store.steampowered.com/widget/2939950/" frameborder="0" width="100%" height="190"></iframe>
+        </div>        
+    `,
+        imageStatic: "img/projects/rumbleStatic.png",
+        imageGif: "img/projects/rumblegif.gif",
+        date: "2024-10-28",
+        tags: ["Em Desenvolvimento", "PC", "RogueLike", "Unity"],
+        playLink: "https://store.steampowered.com/app/2939950/Playground_Rumble/",
+        githubLink: null
+    },
     {
         id: "arrai-defensivo",
         title: "Arrai Defensivo",
@@ -64,10 +101,10 @@ const projectsData = [
         title: "SpellBook - Unity Tools (WIP)",
         shortDescription: "Uma coleção mágica de ferramentas reutilizáveis para projetos Unity. Crie sistemas escaláveis e evite reinventar a roda a cada projeto novo.",
         longDescription: "Atualmente em desenvolvimento, o SpellBook é um repositório pessoal onde estou compilando e refinando sistemas modulares para Unity, com foco em ScriptableObjects. Comecei essa iniciativa para evitar reinventar a roda em cada novo projeto e para aprofundar meu entendimento sobre arquitetura de jogos.",
-        imageStatic: "img/projects/placeholder.png",
-        imageGif: "img/projects/placeholder.png",
+        imageStatic: "img/projects/placeholder.png", // Idealmente, crie uma imagem para este card
+        imageGif: "img/projects/placeholder.png",   // Idealmente, crie um gif para este card
         date: "2024-09-23",
-        tags: ["Em Desenvolvimento", "Ferramentas", "Unity"],
+        tags: ["Em Desenvolvimento", "Unity"],
         githubLink: "https://github.com/gabrielctorres/SpellBook-Unity-Tools",
         developmentStory: `
         <h2>Como Tudo Começou</h2>
@@ -106,4 +143,4 @@ const projectsData = [
         <p>Este projeto reflete minha jornada de aprendizado - cada nova "página" do SpellBook representa um conceito que estou dominando.</p>
     `
     }
-]
+];
