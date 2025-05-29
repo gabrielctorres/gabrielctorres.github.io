@@ -1,13 +1,10 @@
-// script.js
-
-/** 🔗 Formata data no padrão brasileiro */
+// script.js limpo
 function formatDate(dateString) {
     const date = new Date(dateString);
     const options = { year: 'numeric', month: 'short' };
     return date.toLocaleDateString('pt-BR', options);
 }
 
-/** 🏗️ Gera os cards dos projetos dinamicamente */
 function generateProjectCards() {
     const container = document.querySelector('.project-grid');
     if (!container) return;
@@ -47,7 +44,6 @@ function generateProjectCards() {
     addHoverEffects();
 }
 
-/** 🎥 Hover GIF nos cards */
 function addHoverEffects() {
     const images = document.querySelectorAll('.project-image');
 
@@ -61,7 +57,6 @@ function addHoverEffects() {
     });
 }
 
-/** 📅 Atualiza o ano do footer */
 function setCurrentYear() {
     const yearSpan = document.getElementById('currentYear');
     if (yearSpan) {
@@ -69,52 +64,64 @@ function setCurrentYear() {
     }
 }
 
-/** 🖊️ Efeito TypeWriter no Hero */
-function typeWriterEffect() {
-    const heroTitle = document.querySelector('#hero h1');
-    if (!heroTitle) return;
-
-    const textJoke = "Olá, sou o Smite";
-    const textReal = "Olá, sou o Gabriel";
-    const speed = 100;
-    let i = 0;
-
-    heroTitle.innerHTML = "";
-
-    function type(text, next) {
-        if (i < text.length) {
-            heroTitle.innerHTML = text.substring(0, i + 1);
-            i++;
-            setTimeout(() => type(text, next), speed);
-        } else if (next) {
-            setTimeout(next, 1000);
-        }
-    }
-
-    function deleteText(next) {
-        if (i >= 0) {
-            heroTitle.innerHTML = textJoke.substring(0, i);
-            i--;
-            setTimeout(() => deleteText(next), speed / 2);
-        } else {
-            next();
-        }
-    }
-
-    // Sequência: escreve joke -> apaga -> escreve real
-    setTimeout(() => {
-        type(textJoke, () => deleteText(() => {
-            i = 0;
-            type(textReal);
-        }));
-    }, 500);
-}
-
-/** 🚀 Inicialização */
 window.onload = () => {
     if (document.querySelector('.project-grid')) {
         generateProjectCards();
     }
     setCurrentYear();
-    typeWriterEffect();
+    glitchEffect();
+};
+
+function glitchEffect() {
+    const heroTitle = document.querySelector('#hero h1');
+    if (!heroTitle) return;
+
+    const textInitial = "Smite";
+    const textFinal = "Gabriel Torres";
+
+    // Inicializa com o texto inicial
+    heroTitle.textContent = textInitial;
+
+    // Após 2 segundos, inicia o efeito glitch
+    setTimeout(() => {
+        let count = 0;
+        const glitchDuration = 2000; // Duração total do efeito glitch em ms
+        const glitchInterval = 100; // Intervalo entre cada mudança de glitch
+
+        const totalSteps = glitchDuration / glitchInterval;
+
+        const glitchIntervalId = setInterval(() => {
+            if (count < totalSteps) {
+                // Gera um glitch: substitui alguns caracteres por aleatórios
+                const textArray = textInitial.split('');
+
+                // Quantos caracteres serão afetados? Vamos aumentar com o tempo
+                const numGlitches = Math.floor(Math.random() * (count / 2)) + 1;
+                for (let i = 0; i < numGlitches; i++) {
+                    const index = Math.floor(Math.random() * textInitial.length);
+                    textArray[index] = getRandomChar();
+                }
+                heroTitle.textContent = textArray.join('');
+                count++;
+            } else {
+                clearInterval(glitchIntervalId);
+                // Define o texto final
+                heroTitle.textContent = textFinal;
+            }
+        }, glitchInterval);
+    }, 2000);
+}
+
+function getRandomChar() {
+    const chars = '!@#$%^&*()_+-=[]{}|;:,.<>?/';
+    return chars.charAt(Math.floor(Math.random() * chars.length));
+}
+
+// Atualizar o window.onload
+window.onload = () => {
+    if (document.querySelector('.project-grid')) {
+        generateProjectCards();
+    }
+    setCurrentYear();
+    glitchEffect();
 };

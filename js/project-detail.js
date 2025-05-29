@@ -1,5 +1,4 @@
-// project-detail.js
-
+// project-detail.js limpo
 function formatDateDetail(dateString) {
     if (!dateString) return '';
     const date = new Date(dateString + "T00:00:00");
@@ -71,7 +70,6 @@ function setCurrentYearFooter() {
     }
 }
 
-// Event Listeners
 window.onload = () => {
     displayProjectDetails();
     setCurrentYearFooter();

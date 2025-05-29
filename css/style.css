@@ -1,5 +1,5 @@
-/* 🌈 Variáveis Globais */
 :root {
+    /* 🎨 Paleta Geral */
     --bg-color: #03060D;
     --header-footer-bg: #000000;
     --card-bg: #0A1A2F;
@@ -10,6 +10,26 @@
     --text-on-accent: #FFFFFF;
     --border-color: #1E3A5F;
 
+    /* 🏷️ Tags - Evento */
+    --tag-event: #ea8808;
+    /* Amarelo Evento */
+
+    /* 🏷️ Tags - Plataforma */
+    --tag-pc: #3b82f6;
+    /* Azul */
+    --tag-webgl: #3b82f6;
+    /* Azul mais escuro */
+
+    /* 🏷️ Tags - Estilo */
+    --tag-tower-defense: #9333ea;
+    /* Roxo */
+    --tag-platformer: #9333ea;
+    /* Roxo mais escuro */
+
+    /* 🏷️ Tags - Engine */
+    --tag-unity: #f5f5f5;
+
+    /* 🎨 Outros */
     --font-primary: 'Rubik', sans-serif;
     --border-radius: 8px;
     --container-width: 1100px;
@@ -315,33 +335,55 @@ header nav .resume-button:hover {
 }
 
 .project-tag {
-    background-color: var(--accent-color);
-    color: var(--text-on-accent);
     padding: 4px 10px;
     border-radius: var(--border-radius);
     font-size: 0.75rem;
     font-weight: 600;
     text-transform: uppercase;
+    color: var(--text-on-accent);
 }
 
-.project-tag.GameJam {
-    background-color: #eab308;
+/* 🔸 Categoria: Local */
+.project-tag.Local {
+    background-color: var(--tag-local);
 }
 
+/* 🔵 Categoria: Plataforma */
 .project-tag.PC {
-    background-color: #3b82f6;
+    background-color: var(--tag-pc);
 }
 
-.project-tag.Web {
-    background-color: #10b981;
+.project-tag.WEBGL {
+    background-color: var(--tag-webgl);
 }
 
+/* 🟣 Categoria: Estilo */
 .project-tag.TowerDefense {
-    background-color: #ef4444;
+    background-color: var(--tag-tower-defense);
 }
 
-.project-tag.Prototype {
-    background-color: #8b5cf6;
+.project-tag.Platformer {
+    background-color: var(--tag-platformer);
+}
+
+/* ⚙️ Categoria: Engine */
+.project-tag.Unity {
+    background-color: var(--tag-unity);
+    color: #000;
+    /* Texto preto para fundo claro */
+}
+
+/* ⭐ Categoria: Evento */
+.project-tag.GameJam,
+.project-tag.Faculdade {
+    background-color: var(--tag-event);
+    color: #000;
+    /* Melhor contraste no amarelo */
+}
+
+.project-tag {
+    background-color: var(--accent-color);
+    /* fallback */
 }
 
 /* 🗺️ Project Detail */
@@ -584,4 +626,49 @@ footer .container {
     #project-title-detail {
         font-size: 2rem;
     }
+}
+
+/* style.css */
+header nav .icon-button img {
+    width: 40px;
+    /* Aumentado de 32px */
+    height: 40px;
+    transition: all 0.3s ease;
+}
+
+header nav .resume-button {
+    padding: 12px 25px;
+    /* Aumentado */
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+}
+
+/* Novas animações */
+header nav .icon-button:hover img {
+    transform: scale(1.15) rotate(5deg);
+    filter: drop-shadow(0 0 5px var(--accent-color));
+}
+
+header nav .resume-button:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(96, 165, 250, 0.4);
+}
+
+/* Animação pulsante */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+header nav .resume-button {
+    animation: pulse 2s infinite;
 }
