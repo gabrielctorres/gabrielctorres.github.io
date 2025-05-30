@@ -181,10 +181,45 @@ header .container {
     align-items: center;
 }
 
-header .logo {
-    font-size: 1.8rem;
-    font-weight: bold;
+/* Estilo para o logo "G" */
+.logo .text-logo {
+    display: inline-block;
+    font-family: 'Rubik', sans-serif;
+    font-weight: 700;
+    font-size: 4.5rem;
     color: var(--accent-color);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    line-height: 1;
+    padding: 0.5rem;
+    position: relative;
+}
+
+/* Efeito de hover */
+.logo .text-logo:hover {
+    transform: translateY(-5px);
+    text-shadow: 0 5px 15px rgba(96, 165, 250, 0.4);
+    color: #93c5fd;
+    /* Tom mais claro do azul */
+}
+
+/* Efeito de brilho adicional no hover */
+.logo .text-logo:hover::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(96, 165, 250, 0.2) 0%, transparent 70%);
+}
+
+/* Versão responsiva */
+@media (max-width: 768px) {
+    .logo .text-logo {
+        font-size: 2rem;
+    }
 }
 
 header nav {

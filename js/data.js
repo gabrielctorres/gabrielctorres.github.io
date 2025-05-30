@@ -3,36 +3,37 @@ const projectsData = [
     {
         id: "playground-rumble",
         title: "Playground Rumble",
-        shortDescription: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero.",
-        longDescription: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet.",
+        shortDescription: "Um roguelike de ação onde dois irmãos embarcam em uma aventura para recuperar seus brinquedos perdidos.",
+        longDescription: "Junte-se a Miguel e Manuela em uma jornada cheia de ação para recuperar seus brinquedos perdidos, enfrentando hordas de brinquedos descontrolados.",
         developmentStory: `
-        <h2>Lorem Ipsum Dolor Sit Amet</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum. Cras venenatis euismod malesuada.</p>
-        
-        <h3>Inspiração e Conceito</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi facilisis, sapien non feugiat sodales, nisl erat facilisis enim, a convallis metus nulla a nulla.</p>
+<h2>Sobre o Projeto</h2>
+<p><strong>Playground Rumble</strong> é um jogo roguelike onde você acompanha dois irmãos que perderam seus brinquedos e agora precisam enfrentar diversos desafios para recuperá-los.</p>
 
-        <h3>Desafios de Desenvolvimento</h3>
-        <ul>
-            <li><strong>Lorem ipsum:</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-            <li><strong>Lorem ipsum:</strong> Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.</li>
-            <li><strong>Lorem ipsum:</strong> Sed nisi. Nulla quis sem at nibh elementum imperdiet.</li>
-            <li><strong>Lorem ipsum:</strong> Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta.</li>
-        </ul>
+<h3>Inspiração e Conceito</h3>
+<p>Após finalizar meu último projeto da faculdade, eu sabia que queria começar algo menor, que realmente pudesse ser lançado. Tinha várias ideias na cabeça, mas todas pareciam grandes demais para produzir sozinho.</p>
+<p>Foi então que, em uma conversa com meu sobrinho, que sempre soube que eu desenvolvia jogos, ele me pediu para colocá-lo em algum jogo. Isso acendeu uma ideia: criar algo simples, inicialmente como uma brincadeira para que ele se visse em um jogo. Mas percebi que poderia transformar isso em um projeto real, juntando o útil ao agradável.</p>
+<p>Assim nasceram os personagens, que são versões personificadas dos meus sobrinhos.</p>
 
-        <h3>O Futuro</h3>
-        <p>Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque. Quisque porta volutpat erat.</p>
-        
-        <p><strong>Não se esqueça de adicionar à sua lista de desejos na Steam para acompanhar as novidades!</strong></p>
-        
-        <div class="steam-widget-container-detail-page" style="margin-top: 25px; margin-bottom: 15px; max-width: 646px; margin-left: auto; margin-right: auto;">
-            <iframe src="https://store.steampowered.com/widget/2939950/" frameborder="0" width="100%" height="190"></iframe>
-        </div>        
-    `,
+<p>As principais referências para o jogo foram <strong>Enter the Gungeon</strong>, <strong>Risk of Rain</strong> e o modo multiplayer dos jogos <strong>LEGO</strong>. A ideia inicial era permitir que um segundo jogador pudesse entrar na mesma partida a qualquer momento, mas infelizmente essa funcionalidade precisou ser descartada ao longo do desenvolvimento.</p>
+
+<h3>Desafios de Desenvolvimento</h3>
+<p>Mesmo acreditando que esse projeto seria menor do que minhas outras ideias, desenvolver um jogo sozinho foi muito mais desafiador do que imaginei. Isso acabou gerando uma demora no desenvolvimento, especialmente em etapas como programação, arte e balanceamento.</p>
+
+<h3>O Futuro</h3>
+<p>Minha meta para 2025 é lançar uma campanha de financiamento coletivo. O objetivo é arrecadar recursos para finalizar o jogo, incluindo trilha sonora, efeitos sonoros e outros custos de produção, que serão detalhados na página da campanha.</p>
+<p>Para aumentar as chances de sucesso, pretendo disponibilizar uma <strong>demo jogável</strong> para que todos possam experimentar o jogo antes mesmo do financiamento.</p>
+<p>Se, por algum motivo, a campanha não alcançar sua meta, o jogo ainda será lançado na Steam, mas com alguns cortes de conteúdo, servindo também como parte do meu portfólio. (Tomara que não precise chegar a esse ponto, né?)</p>
+
+<p><strong>Adicione Playground Rumble à sua lista de desejos na Steam e acompanhe as novidades!</strong></p>
+
+<div class="steam-widget-container-detail-page" style="margin-top: 25px; margin-bottom: 15px; max-width: 646px; margin-left: auto; margin-right: auto;">
+    <iframe src="https://store.steampowered.com/widget/2939950/" frameborder="0" width="100%" height="190"></iframe>
+</div>        
+`,
         imageStatic: "img/projects/rumbleStatic.png",
         imageGif: "img/projects/rumblegif.gif",
-        date: "2024-10-28",
-        tags: ["Em Desenvolvimento", "PC", "RogueLike", "Unity"],
+        date: "2022-01-15",
+        tags: ["Em Desenvolvimento", "PC", "Roguelike", "Unity"],
         playLink: "https://store.steampowered.com/app/2939950/Playground_Rumble/",
         githubLink: null
     },
@@ -95,52 +96,5 @@ const projectsData = [
             <p>O projeto foi lançado em <strong>18 de abril de 2021</strong> e recebeu seu <strong>update final em 13 de dezembro de 2021</strong>.</p>
             <p>Foi uma experiência extremamente valiosa, tanto em desenvolvimento técnico quanto em trabalho em equipe, resultando em um jogo que temos muito orgulho de ter produzido.</p>
         `
-    },
-    {
-        id: "spell-book",
-        title: "SpellBook - Unity Tools (WIP)",
-        shortDescription: "Uma coleção mágica de ferramentas reutilizáveis para projetos Unity. Crie sistemas escaláveis e evite reinventar a roda a cada projeto novo.",
-        longDescription: "Atualmente em desenvolvimento, o SpellBook é um repositório pessoal onde estou compilando e refinando sistemas modulares para Unity, com foco em ScriptableObjects. Comecei essa iniciativa para evitar reinventar a roda em cada novo projeto e para aprofundar meu entendimento sobre arquitetura de jogos.",
-        imageStatic: "img/projects/placeholder.png", // Idealmente, crie uma imagem para este card
-        imageGif: "img/projects/placeholder.png",   // Idealmente, crie um gif para este card
-        date: "2024-09-23",
-        tags: ["Em Desenvolvimento", "Unity"],
-        githubLink: "https://github.com/gabrielctorres/SpellBook-Unity-Tools",
-        developmentStory: `
-        <h2>Como Tudo Começou</h2>
-        <p>O <strong>SpellBook</strong> foi iniciado em <strong>23 de setembro de 2024</strong> como um projeto paralelo ao desenvolver outros jogos. Percebi que:</p>
-        <ul>
-            <li>⏳ Gastava tempo demais recriando sistemas básicos</li>
-            <li>🔄 Meus códigos não eram fáceis de reaproveitar entre projetos</li>
-            <li>📚 Precisava de um lugar organizado para consolidar meu aprendizado</li>
-        </ul>
-
-        <h2>O Que Contém Atualmente</h2>
-        <p>Na versão inicial (ainda em construção):</p>
-        <ul>
-            <li>✨ Sistema básico de eventos com ScriptableObjects</li>
-            <li>📁 Estrutura padrão de pastas que costumo usar</li>
-            <li>🧩 Alguns componentes genéricos para controle de cenas</li>
-            <li>🚧 <em>Aviso:</em> Ainda não é um pacote completo ou documentado</em></li>
-        </ul>
-
-        <h2>Por Que Compartilhar?</h2>
-        <p>Decidi tornar público porque:</p>
-        <ul>
-            <li>🔍 Me motiva a manter o código mais organizado</li>
-            <li>📝 Eventualmente quero adicionar documentação para outros devs</li>
-            <li>🛠️ Pode ser útil como referência para iniciantes em ScriptableObjects</li>
-        </ul>
-
-        <h2>Planos Futuros</h2>
-        <p>Conforme meu conhecimento avança, pretendo:</p>
-        <ul>
-            <li>🧪 Adicionar mais exemplos práticos de uso</li>
-            <li>📦 Transformar em um pacote Unity propriamente dito</li>
-            <li>⚙️ Implementar sistemas de save e configurações</li>
-        </ul>
-
-        <p>Este projeto reflete minha jornada de aprendizado - cada nova "página" do SpellBook representa um conceito que estou dominando.</p>
-    `
     }
 ];
