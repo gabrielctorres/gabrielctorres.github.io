@@ -78,40 +78,33 @@ function glitchEffect() {
 
     const textFinal = "Gabriel Torres";
 
-    // Verifica se é um dispositivo móvel
-    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    // Em desktop, mantém a animação glitch
+    const textInitial = "Smite";
+    heroTitle.textContent = textInitial;
 
-    if (isMobile) {
-        // Em mobile, mostra o texto final diretamente sem animação
-        heroTitle.textContent = textFinal;
-    } else {
-        // Em desktop, mantém a animação glitch
-        const textInitial = "Smite";
-        heroTitle.textContent = textInitial;
+    setTimeout(() => {
+        let count = 0;
+        const glitchDuration = 2000;
+        const glitchInterval = 100;
+        const totalSteps = glitchDuration / glitchInterval;
 
-        setTimeout(() => {
-            let count = 0;
-            const glitchDuration = 2000;
-            const glitchInterval = 100;
-            const totalSteps = glitchDuration / glitchInterval;
-
-            const glitchIntervalId = setInterval(() => {
-                if (count < totalSteps) {
-                    const textArray = textInitial.split('');
-                    const numGlitches = Math.floor(Math.random() * (count / 2)) + 1;
-                    for (let i = 0; i < numGlitches; i++) {
-                        const index = Math.floor(Math.random() * textInitial.length);
-                        textArray[index] = getRandomChar();
-                    }
-                    heroTitle.textContent = textArray.join('');
-                    count++;
-                } else {
-                    clearInterval(glitchIntervalId);
-                    heroTitle.textContent = textFinal;
+        const glitchIntervalId = setInterval(() => {
+            if (count < totalSteps) {
+                const textArray = textInitial.split('');
+                const numGlitches = Math.floor(Math.random() * (count / 2)) + 1;
+                for (let i = 0; i < numGlitches; i++) {
+                    const index = Math.floor(Math.random() * textInitial.length);
+                    textArray[index] = getRandomChar();
                 }
-            }, glitchInterval);
-        }, 2000);
-    }
+                heroTitle.textContent = textArray.join('');
+                count++;
+            } else {
+                clearInterval(glitchIntervalId);
+                heroTitle.textContent = textFinal;
+            }
+        }, glitchInterval);
+    }, 2000);
+}
 }
 
 function getRandomChar() {
