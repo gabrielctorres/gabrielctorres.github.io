@@ -76,40 +76,42 @@ function glitchEffect() {
     const heroTitle = document.querySelector('#hero h1');
     if (!heroTitle) return;
 
-    const textInitial = "Smite";
     const textFinal = "Gabriel Torres";
 
-    // Inicializa com o texto inicial
-    heroTitle.textContent = textInitial;
+    // Verifica se é um dispositivo móvel
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
-    // Após 2 segundos, inicia o efeito glitch
-    setTimeout(() => {
-        let count = 0;
-        const glitchDuration = 2000; // Duração total do efeito glitch em ms
-        const glitchInterval = 100; // Intervalo entre cada mudança de glitch
+    if (isMobile) {
+        // Em mobile, mostra o texto final diretamente sem animação
+        heroTitle.textContent = textFinal;
+    } else {
+        // Em desktop, mantém a animação glitch
+        const textInitial = "Smite";
+        heroTitle.textContent = textInitial;
 
-        const totalSteps = glitchDuration / glitchInterval;
+        setTimeout(() => {
+            let count = 0;
+            const glitchDuration = 2000;
+            const glitchInterval = 100;
+            const totalSteps = glitchDuration / glitchInterval;
 
-        const glitchIntervalId = setInterval(() => {
-            if (count < totalSteps) {
-                // Gera um glitch: substitui alguns caracteres por aleatórios
-                const textArray = textInitial.split('');
-
-                // Quantos caracteres serão afetados? Vamos aumentar com o tempo
-                const numGlitches = Math.floor(Math.random() * (count / 2)) + 1;
-                for (let i = 0; i < numGlitches; i++) {
-                    const index = Math.floor(Math.random() * textInitial.length);
-                    textArray[index] = getRandomChar();
+            const glitchIntervalId = setInterval(() => {
+                if (count < totalSteps) {
+                    const textArray = textInitial.split('');
+                    const numGlitches = Math.floor(Math.random() * (count / 2)) + 1;
+                    for (let i = 0; i < numGlitches; i++) {
+                        const index = Math.floor(Math.random() * textInitial.length);
+                        textArray[index] = getRandomChar();
+                    }
+                    heroTitle.textContent = textArray.join('');
+                    count++;
+                } else {
+                    clearInterval(glitchIntervalId);
+                    heroTitle.textContent = textFinal;
                 }
-                heroTitle.textContent = textArray.join('');
-                count++;
-            } else {
-                clearInterval(glitchIntervalId);
-                // Define o texto final
-                heroTitle.textContent = textFinal;
-            }
-        }, glitchInterval);
-    }, 2000);
+            }, glitchInterval);
+        }, 2000);
+    }
 }
 
 function getRandomChar() {

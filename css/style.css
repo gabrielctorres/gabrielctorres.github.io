@@ -881,6 +881,96 @@ footer .container {
     }
 }
 
+@media (max-width: 480px) {
+
+    /* Ajustes adicionais para telas muito pequenas */
+    :root {
+        --section-padding: 40px 0;
+    }
+
+    /* Hero section */
+    #hero {
+        min-height: 70vh;
+        padding: 30px 0;
+    }
+
+    #hero h1 {
+        font-size: 1.8rem;
+        line-height: 1.2;
+    }
+
+    #hero .subtitle {
+        font-size: 1rem;
+    }
+
+    /* About section */
+    .about-content {
+        gap: 20px;
+    }
+
+    .about-text h3 {
+        font-size: 1.5rem;
+    }
+
+    .about-text p {
+        font-size: 0.95rem;
+    }
+
+    /* Current project */
+    .current-project-card {
+        padding: 15px;
+    }
+
+    .current-project-info h3 {
+        font-size: 1.5rem;
+    }
+
+    .current-project-info .description {
+        font-size: 0.9rem;
+    }
+
+    /* Steam widget adjustments */
+    .steam-widget-container {
+        min-height: 190px;
+    }
+
+    .steam-widget-container iframe {
+        min-height: 190px;
+    }
+
+    /* Remove hover effects on touch devices */
+    @media (hover: none) {
+        .project-card:hover {
+            transform: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border-color: var(--border-color);
+        }
+
+        header nav .icon-button:hover img {
+            transform: none;
+            filter: var(--icon-filter-default);
+        }
+
+        .action-button:hover,
+        .learn-more-button:hover,
+        header nav .resume-button:hover {
+            transform: none;
+        }
+    }
+}
+
+/* Ajustes para tablets e celulares em landscape */
+@media (max-width: 768px) and (orientation: landscape) {
+    #hero {
+        min-height: 90vh;
+    }
+
+    .about-content {
+        flex-direction: row;
+        text-align: left;
+    }
+}
+
 .learn-more-button {
     padding: 12px 25px;
     background-color: #ff417d;
