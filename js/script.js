@@ -105,10 +105,10 @@ function glitchEffect() {
         }, glitchInterval);
     }, 2000);
 }
-}
+
 
 function getRandomChar() {
-    const chars = '!@#$%^&*()_+-=[]{}|;:,.<>?/';
+    const chars = '!@#$%^&*()_+-=[]{}|;:,.<>?/BCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     return chars.charAt(Math.floor(Math.random() * chars.length));
 }
 
