@@ -571,11 +571,12 @@ header nav .resume-button:hover {
     background-color: var(--tag-pc);
 }
 
-.project-tag.RogueLike,
+.project-tag.Roguelike,
 .project-tag.TowerDefense,
 .project-tag.Platformer {
     background-color: var(--tag-tower-defense);
 }
+
 
 .project-tag.Unity {
     background-color: var(--tag-unity);

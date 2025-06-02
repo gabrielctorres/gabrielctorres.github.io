@@ -1,0 +1,37 @@
+/* variables.css */
+:root {
+    /* 🎨 Paleta Geral */
+    --bg-color: #03060D;
+    --header-footer-bg: #000000;
+    --card-bg: #0A1A2F;
+    --accent-color: #60A5FA;
+    --accent-hover-color: #3B82F6;
+    --text-color: #FFFFFF;
+    --text-color-secondary: #B0C4DE;
+    --text-on-accent: #FFFFFF;
+    --border-color: #1E3A5F;
+
+    /* Gradiente Projeto Atual */
+    --gradient-color-1: #28c074;
+    --gradient-color-2: #ff417d;
+    --gradient-color-1-rgb: 40, 192, 116;
+    --gradient-color-2-rgb: 255, 65, 125;
+
+    /* Tags */
+    --tag-event: #ea8808;
+    --tag-pc: #3b82f6;
+    --tag-webgl: #3b82f6;
+    --tag-tower-defense: #9333ea;
+    --tag-platformer: #9333ea;
+    --tag-roguelike: #9333ea;
+    --tag-unity: #f5f5f5;
+
+    /* Outros */
+    --font-primary: 'Rubik', sans-serif;
+    --border-radius: 8px;
+    --container-width: 1100px;
+    --section-padding: 60px 0;
+
+    --icon-filter-default: brightness(0) invert(1);
+    --icon-filter-hover: brightness(0) invert(1) opacity(0.8);
+}
