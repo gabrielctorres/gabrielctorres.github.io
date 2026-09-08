@@ -69,6 +69,38 @@ a:hover {
     color: var(--accent-hover-color);
 }
 
+/* ♿ Acessibilidade: foco visível para navegação por teclado */
+a:focus-visible,
+button:focus-visible,
+.icon-button:focus-visible,
+.resume-button:focus-visible,
+.cta-button:focus-visible,
+.action-button:focus-visible,
+.project-card:focus-visible {
+    outline: 3px solid var(--accent-color);
+    outline-offset: 3px;
+    border-radius: var(--border-radius);
+}
+
+/* ♿ Skip link: visível apenas ao focar via teclado */
+.skip-link {
+    position: absolute;
+    top: -100px;
+    left: 10px;
+    z-index: 2000;
+    background-color: var(--accent-color);
+    color: var(--text-on-accent);
+    padding: 10px 20px;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    transition: top 0.3s ease;
+}
+
+.skip-link:focus {
+    top: 10px;
+    color: var(--text-on-accent);
+}
+
 .container {
     width: 90%;
     max-width: var(--container-width);
@@ -425,33 +457,6 @@ header nav .resume-button:hover {
     display: block;
     border-radius: calc(var(--border-radius) - 2px);
 }
-
-.steam-wishlist-button {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 12px 25px;
-    background-image: linear-gradient(to right, var(--gradient-color-1), var(--gradient-color-2));
-    color: var(--text-color);
-    border: none;
-    font-weight: 600;
-    text-transform: uppercase;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    /* Adicionada transição */
-}
-
-.steam-wishlist-button:hover {
-    opacity: 0.9;
-    transform: translateY(-2px);
-    color: var(--text-color);
-}
-
-.steam-icon-button {
-    width: 24px;
-    height: 24px;
-    filter: brightness(0) invert(1);
-}
-
 
 /* 🎨 Projetos (Grid) */
 #projects {

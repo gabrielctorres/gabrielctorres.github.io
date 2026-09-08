@@ -88,5 +88,22 @@
         "playLink": "https://gabrieltorres.itch.io/alexandre",
         "siteLink": "https://gabrielctorres.github.io/SiteAlexandre/",
         "developmentStory": "<h2>Sobre o Projeto</h2><p><strong>Alexandre: Em Busca da Relíquia Perdida</strong> foi o <strong>último projeto desenvolvido na faculdade</strong>. Diferente dos projetos anteriores, tivemos <strong>um ano inteiro</strong> para desenvolver e aperfeiçoar o jogo. Escolhemos criar um <strong>jogo 2D no estilo platformer</strong>, simples, porém robusto, com o objetivo de aplicar todo o conhecimento adquirido nos últimos semestres.</p><p>Eu atuei como <strong>programador principal</strong>, focando nas <strong>mecânicas dos bosses e do personagem</strong>. Também foi nesse projeto que comecei a estudar e aplicar <strong>iluminação 2D</strong> e <strong>shaders na Unity</strong>, o que trouxe muito mais vida e profundidade visual ao jogo.</p><p>Além do jogo, também desenvolvemos um <strong>site oficial</strong> sobre o projeto, que pode ser acessado <a href=\"https://gabrielctorres.github.io/SiteAlexandre/\" target=\"_blank\">clicando aqui</a>.</p><p>Foi uma experiência extremamente valiosa, tanto em desenvolvimento técnico quanto em trabalho em equipe.</p>"
+    },
+    {
+        "id": "order-up",
+        "title": "Order UP!",
+        "shortDescription": "Order Up! é um jogo de gerenciamento e dedução criado para a Comfy Jam Summer 2026 com base no tema 'The Instructions are a Lie'.",
+        "longDescription": "No comando de um quiosque de praia, o jogador precisa gerenciar os pedidos e identificar as falhas causadas por um garçom impostor antes de realizar os minigames de preparo.",
+        "imageStatic": "img/projects/orderUP1.png",
+        "imageGif": "img/projects/orderUP2.png",
+        "date": "2026-06-19",
+        "tags": [
+            "Game Jam",
+            "WEBGL",
+            "Unity"
+        ],
+        "githubLink": "https://github.com/gabrielctorres/ProjetoComfy",
+        "playLink": "https://gabrieltorres.itch.io/orderup",
+        "developmentStory": "<h2>Sobre o Projeto</h2><p>Apesar de enfrentarmos imprevistos pessoais que reduziram nosso tempo de desenvolvimento em dois dias, realizamos um brainstorming focado e decidimos criar um jogo de gerenciamento em uma barraca de praia. A mecânica principal envolve identificar os pedidos adulterados por um garçom impostor que tenta provocar sua demissão e, em seguida, executar o minigame de preparo. Devido à quantidade de mecânicas planejadas, não conseguimos entregar um jogo bem polido, então ele possui alguns erros mas conseguimos ter o loop de gameplay completo.</p><h3>Créditos</h3><p>Ana, Gabriel, Killuado, Toph e Victor.</p>"
     }
 ]

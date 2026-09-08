@@ -22,7 +22,18 @@ async function generateProjectCards() {
         sortedProjects.forEach(project => {
             const card = document.createElement('div');
             card.className = 'project-card';
-            card.onclick = () => window.location.href = `project.html?id=${project.id}`;
+            card.setAttribute('role', 'link');
+            card.setAttribute('tabindex', '0');
+            card.setAttribute('aria-label', `Ver detalhes de ${project.title}`);
+
+            const goToProject = () => window.location.href = `project.html?id=${project.id}`;
+            card.addEventListener('click', goToProject);
+            card.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    goToProject();
+                }
+            });
 
             const tagsHtml = project.tags.map(tag =>
                 `<span class="project-tag">${tag}</span>`

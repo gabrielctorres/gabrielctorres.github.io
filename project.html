@@ -4,12 +4,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detalhes do Projeto</title>
+    <meta name="description" content="Detalhes do projeto desenvolvido por Gabriel Torres, programador de jogos.">
+    <title>Detalhes do Projeto | Gabriel Torres</title>
+
+    <!-- Open Graph (atualizado dinamicamente por project-detail.js) -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Detalhes do Projeto | Gabriel Torres">
+    <meta property="og:description" content="Detalhes do projeto desenvolvido por Gabriel Torres, programador de jogos.">
+    <meta property="og:image" content="https://gabrielctorres.github.io/img/og-image.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
+    <a href="#main-content" class="skip-link">Pular para o conteúdo</a>
+
     <header>
         <div class="container">
             <div class="logo">
@@ -25,12 +37,12 @@
                     aria-label="LinkedIn">
                     <img src="img/icons/linkedin.svg" alt="LinkedIn">
                 </a>
-                <a href="img/Curriculo Gabriel Torres 01.pdf" target="_blank" class="resume-button">Currículo</a>
+                <a href="img/curriculo-gabriel-torres.pdf" target="_blank" class="resume-button">Currículo</a>
             </nav>
         </div>
     </header>
 
-    <main class="project-detail-page">
+    <main class="project-detail-page" id="main-content">
         <div class="container">
             <div class="project-detail-header">
                 <a href="index.html" class="back-button">&larr; Voltar para Projetos</a>
@@ -65,7 +77,6 @@
         </div>
     </footer>
 
-    <script src="js/data.js"></script>
     <script src="js/project-detail.js"></script>
 </body>
 

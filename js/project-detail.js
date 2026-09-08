@@ -22,6 +22,7 @@ async function displayProjectDetails() {
 
         if (project) {
             document.title = `${project.title} | Gabriel Torres`;
+            updateMetaTags(project);
             document.getElementById('project-title-detail').textContent = project.title;
             document.getElementById('project-date-detail').textContent = `Publicado em: ${await formatDateDetail(project.date)}`;
 
@@ -56,6 +57,23 @@ async function displayProjectDetails() {
         console.error('Erro ao carregar projeto:', err);
         handleProjectNotFound();
     }
+}
+
+function updateMetaTags(project) {
+    const description = project.shortDescription || project.longDescription || '';
+    const imageUrl = project.imageStatic
+        ? new URL(project.imageStatic, window.location.href).href
+        : '';
+
+    const setMeta = (selector, content) => {
+        const el = document.querySelector(selector);
+        if (el) el.setAttribute('content', content);
+    };
+
+    setMeta('meta[name="description"]', description);
+    setMeta('meta[property="og:title"]', `${project.title} | Gabriel Torres`);
+    setMeta('meta[property="og:description"]', description);
+    if (imageUrl) setMeta('meta[property="og:image"]', imageUrl);
 }
 
 function handleProjectNotFound() {
