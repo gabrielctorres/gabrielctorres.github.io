@@ -21,24 +21,9 @@
     /* Rosa RGB */
 
 
-    /* 🏷️ Tags - Evento */
-    --tag-event: #ea8808;
-    /* Amarelo Evento */
-
-    /* 🏷️ Tags - Plataforma */
-    --tag-pc: #3b82f6;
-    /* Azul */
-    --tag-webgl: #3b82f6;
-    /* Azul mais escuro */
-
-    /* 🏷️ Tags - Estilo */
-    --tag-tower-defense: #9333ea;
-    /* Roxo */
-    --tag-platformer: #9333ea;
-    /* Roxo mais escuro */
-    --tag-roguelike: #9333ea;
-    /* 🏷️ Tags - Engine */
-    --tag-unity: #f5f5f5;
+    /* 🏷️ Tags - agora genéricas, sem cor fixa por nome (ver .project-tag) */
+    --tag-bg: rgba(96, 165, 250, 0.12);
+    --tag-bg-hover: rgba(96, 165, 250, 0.22);
 
     /* 🎨 Outros */
     --font-primary: 'Rubik', sans-serif;
@@ -550,41 +535,23 @@ header nav .resume-button:hover {
 }
 
 .project-tag {
-    padding: 3px 8px;
-    /* Ligeiramente reduzido */
+    padding: 3px 10px;
+    /* Ligeiramente ajustado */
     border-radius: var(--border-radius);
     font-size: 0.7rem;
-    /* Ligeiramente reduzido */
     font-weight: 600;
     text-transform: uppercase;
-    color: var(--text-on-accent);
+    color: var(--accent-color);
+    background-color: var(--tag-bg);
+    border: 1px solid var(--border-color);
+    transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
 }
 
-.project-tag.GameJam,
-.project-tag.Faculdade {
-    background-color: var(--tag-event);
-    color: #000;
-}
-
-.project-tag.PC,
-.project-tag.WEBGL {
-    background-color: var(--tag-pc);
-}
-
-.project-tag.Roguelike,
-.project-tag.TowerDefense,
-.project-tag.Platformer {
-    background-color: var(--tag-tower-defense);
-}
-
-
-.project-tag.Unity {
-    background-color: var(--tag-unity);
-    color: #000;
-}
-
-.project-tag.EmDesenvolvimento {
-    background-color: #dc2626;
+/* Estilo único e genérico: qualquer tag nova já funciona automaticamente,
+   sem precisar cadastrar uma cor específica para ela. */
+.project-tag:hover {
+    background-color: var(--tag-bg-hover);
+    border-color: var(--accent-color);
 }
 
 /* 🗺️ Project Detail Page Styles (project.html) */

@@ -5,43 +5,53 @@ function formatDate(dateString) {
     return date.toLocaleDateString('pt-BR', options);
 }
 
-function generateProjectCards() {
+async function generateProjectCards() {
     const container = document.querySelector('.project-grid');
     if (!container) return;
 
-    container.innerHTML = '';
+    container.innerHTML = '<p>Carregando projetos...</p>';
 
-    const sortedProjects = [...projectsData].sort((a, b) => new Date(b.date) - new Date(a.date));
+    try {
+        const response = await fetch('js/data.json');
+        const projectsData = await response.json();
 
-    sortedProjects.forEach(project => {
-        const card = document.createElement('div');
-        card.className = 'project-card';
-        card.onclick = () => window.location.href = `project.html?id=${project.id}`;
+        container.innerHTML = '';
 
-        const tagsHtml = project.tags.map(tag =>
-            `<span class="project-tag ${tag.replace(/\s+/g, '')}">${tag}</span>`
-        ).join('');
+        const sortedProjects = [...projectsData].sort((a, b) => new Date(b.date) - new Date(a.date));
 
-        card.innerHTML = `
-            <img 
-                src="${project.imageStatic}" 
-                data-gif="${project.imageGif}" 
-                data-static="${project.imageStatic}" 
-                alt="${project.title}" 
-                class="project-image"
-            >
-            <div class="card-content">
-                <h2>${project.title}</h2>
-                <div class="project-tags">${tagsHtml}</div>
-                <p class="project-date">${formatDate(project.date)}</p>
-                <p>${project.shortDescription}</p>
-            </div>
-        `;
+        sortedProjects.forEach(project => {
+            const card = document.createElement('div');
+            card.className = 'project-card';
+            card.onclick = () => window.location.href = `project.html?id=${project.id}`;
 
-        container.appendChild(card);
-    });
+            const tagsHtml = project.tags.map(tag =>
+                `<span class="project-tag">${tag}</span>`
+            ).join('');
 
-    addHoverEffects();
+            card.innerHTML = `
+                <img 
+                    src="${project.imageStatic}" 
+                    data-gif="${project.imageGif}" 
+                    data-static="${project.imageStatic}" 
+                    alt="${project.title}" 
+                    class="project-image"
+                >
+                <div class="card-content">
+                    <h2>${project.title}</h2>
+                    <div class="project-tags">${tagsHtml}</div>
+                    <p class="project-date">${formatDate(project.date)}</p>
+                    <p>${project.shortDescription}</p>
+                </div>
+            `;
+
+            container.appendChild(card);
+        });
+
+        addHoverEffects();
+    } catch (error) {
+        console.error('Erro ao carregar projetos:', error);
+        container.innerHTML = '<p>Erro ao carregar projetos.</p>';
+    }
 }
 
 function addHoverEffects() {
