@@ -1,0 +1,298 @@
+---
+// TEMPORÁRIO: menu para testar paletas do site. Para remover, apague este arquivo
+// e a linha <TestePaletas /> (e o import) em src/layouts/Base.astro.
+const paletas = [
+  {
+    id: 'ambar',
+    nome: 'Âmbar (atual)',
+    cores: {},
+  },
+  {
+    id: 'teal-lima',
+    nome: 'Teal e lima',
+    cores: {
+      fundo: '#0b1f1e', painel: '#12302e', 'painel-alto': '#18403d', linha: '#1f4a47', borda: '#2a5e5a',
+      'borda-forte': '#4f8a85', texto: '#cfe8df', 'texto-forte': '#e3f7cf', 'texto-suave': '#8fb5ac',
+      ambar: '#9be15d', 'ambar-claro': '#b8ee86', 'sobre-ambar': '#0a3d3a', foco: '#e3f7cf',
+    },
+  },
+  {
+    id: 'navy-pessego',
+    nome: 'Navy e pêssego',
+    cores: {
+      fundo: '#060f1c', painel: '#0a1a2f', 'painel-alto': '#1e1c38', linha: '#13243d', borda: '#2b3f5e',
+      'borda-forte': '#64799b', texto: '#e6dfd0', 'texto-forte': '#f3ecdc', 'texto-suave': '#a9a2b8',
+      ambar: '#f4a76a', 'ambar-claro': '#f8c095', 'sobre-ambar': '#0a1a2f', foco: '#6baeff',
+    },
+  },
+  {
+    id: 'uva-laranja',
+    nome: 'Uva e laranja',
+    cores: {
+      fundo: '#14101c', painel: '#1e1829', 'painel-alto': '#2a2238', linha: '#2e2540', borda: '#43375c',
+      'borda-forte': '#75689a', texto: '#d3cce0', 'texto-forte': '#f1edf7', 'texto-suave': '#9d93b3',
+      ambar: '#ff9f43', 'ambar-claro': '#ffbc7d', 'sobre-ambar': '#14101c', foco: '#f1edf7',
+    },
+  },
+  {
+    id: 'neon',
+    nome: 'Neon ciano',
+    cores: {
+      fundo: '#0d0b1a', painel: '#16122b', 'painel-alto': '#211b3d', linha: '#251f45', borda: '#3a3166',
+      'borda-forte': '#6c62a3', texto: '#d0cce6', 'texto-forte': '#f2f0ff', 'texto-suave': '#9a94c0',
+      ambar: '#33e1ed', 'ambar-claro': '#7ff0f7', 'sobre-ambar': '#0d0b1a', foco: '#f2f0ff',
+    },
+  },
+  {
+    id: 'game-boy',
+    nome: 'Game Boy (claro)',
+    cores: {
+      fundo: '#9bbc0f', painel: '#8bac0f', 'painel-alto': '#7a9a0d', linha: '#306230', borda: '#306230',
+      'borda-forte': '#0f380f', texto: '#0f380f', 'texto-forte': '#0f380f', 'texto-suave': '#24502a',
+      ambar: '#0f380f', 'ambar-claro': '#306230', 'sobre-ambar': '#9bbc0f', foco: '#0f380f',
+      comum: '#306230', rara: '#17456b', epica: '#4b2a6b', lendaria: '#0f380f',
+    },
+  },
+];
+
+// Fontes para testar. "local" já vem com o site; as outras são baixadas do Google Fonts só quando escolhidas.
+const fontes = {
+  titulo: [
+    { nome: 'Press Start 2P (atual)', familia: "'Press Start 2P'", local: true, pixel: true },
+    { nome: 'Rubik', familia: "'Rubik Variable'", local: true },
+    { nome: 'Space Grotesk', familia: "'Space Grotesk'" },
+    { nome: 'Chakra Petch', familia: "'Chakra Petch'" },
+    { nome: 'Oxanium', familia: "'Oxanium'" },
+    { nome: 'Sora', familia: "'Sora'" },
+    { nome: 'Bricolage Grotesque', familia: "'Bricolage Grotesque'" },
+    { nome: 'Rajdhani', familia: "'Rajdhani'" },
+    { nome: 'Barlow Condensed', familia: "'Barlow Condensed'" },
+  ],
+  ui: [
+    { nome: 'Silkscreen (atual)', familia: "'Silkscreen'", local: true },
+    { nome: 'JetBrains Mono', familia: "'JetBrains Mono'" },
+    { nome: 'Space Mono', familia: "'Space Mono'" },
+    { nome: 'IBM Plex Mono', familia: "'IBM Plex Mono'" },
+    { nome: 'Chakra Petch', familia: "'Chakra Petch'" },
+    { nome: 'Rubik', familia: "'Rubik Variable'", local: true },
+  ],
+  texto: [
+    { nome: 'Rubik (atual)', familia: "'Rubik Variable'", local: true },
+    { nome: 'Inter', familia: "'Inter'" },
+    { nome: 'Atkinson Hyperlegible', familia: "'Atkinson Hyperlegible'" },
+    { nome: 'Nunito Sans', familia: "'Nunito Sans'" },
+    { nome: 'IBM Plex Sans', familia: "'IBM Plex Sans'" },
+    { nome: 'Work Sans', familia: "'Work Sans'" },
+  ],
+};
+const grupos = [
+  { chave: 'titulo', rotulo: 'Títulos' },
+  { chave: 'ui', rotulo: 'Rótulos' },
+  { chave: 'texto', rotulo: 'Texto' },
+] as const;
+---
+<div class="teste-paletas" data-teste-paletas>
+  <button type="button" class="teste-botao" aria-expanded="false" aria-controls="teste-painel" data-abrir>
+    Cores e fontes
+  </button>
+  <div class="teste-painel" id="teste-painel" data-painel hidden>
+  <fieldset class="teste-grupo">
+    <legend>Paleta</legend>
+    {paletas.map((p) => (
+      <label class="teste-opcao">
+        <input type="radio" name="paleta-teste" value={p.id} data-cores={JSON.stringify(p.cores)} />
+        <span class="teste-amostras" aria-hidden="true">
+          {['fundo', 'painel', 'texto-forte', 'ambar'].map((k) => (
+            <span class={`teste-amostra amostra-${k}`} data-cor={p.cores[k as keyof typeof p.cores] ?? ''}></span>
+          ))}
+        </span>
+        {p.nome}
+      </label>
+    ))}
+  </fieldset>
+  <fieldset class="teste-grupo">
+    <legend>Fontes</legend>
+    {grupos.map((g) => (
+      <label class="teste-fonte">
+        {g.rotulo}
+        <select data-fonte={g.chave}>
+          {fontes[g.chave].map((f) => (
+            <option value={f.familia} data-local={f.local ? '1' : ''} data-pixel={'pixel' in f ? '1' : ''}>{f.nome}</option>
+          ))}
+        </select>
+      </label>
+    ))}
+  </fieldset>
+  </div>
+</div>
+
+<style>
+  .teste-paletas {
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+    z-index: 90;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: flex-end;
+    gap: 8px;
+    font-family: var(--fonte-ui);
+    font-size: 13px;
+  }
+
+  .teste-botao {
+    min-height: 44px;
+    padding: 0 14px;
+    background: var(--painel-alto);
+    border: var(--px) solid var(--borda-forte);
+    color: var(--texto-forte);
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  .teste-painel {
+    display: grid;
+    gap: 12px;
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+    padding: 12px;
+    background: var(--painel);
+    border: var(--px) solid var(--borda-forte);
+    color: var(--texto);
+  }
+
+  .teste-painel[hidden] {
+    display: none;
+  }
+
+  .teste-grupo {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    display: grid;
+    gap: 4px;
+  }
+
+  .teste-fonte {
+    display: grid;
+    gap: 4px;
+    padding: 4px 8px;
+  }
+
+  .teste-fonte select {
+    min-height: 36px;
+    padding: 0 8px;
+    background: var(--fundo);
+    border: 2px solid var(--borda-forte);
+    color: var(--texto-forte);
+    font: 14px var(--fonte-texto);
+  }
+
+  .teste-grupo legend {
+    padding: 0 6px;
+    color: var(--texto-suave);
+    text-transform: uppercase;
+  }
+
+  .teste-opcao {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 36px;
+    padding: 0 8px;
+    cursor: pointer;
+  }
+
+  .teste-opcao:has(input:checked) {
+    background: var(--painel-alto);
+    color: var(--texto-forte);
+  }
+
+  .teste-amostras {
+    display: flex;
+    border: 2px solid var(--borda-forte);
+  }
+
+  .teste-amostra {
+    width: 14px;
+    height: 14px;
+  }
+</style>
+
+<script is:inline>
+  (() => {
+    const raiz = document.querySelector('[data-teste-paletas]');
+    const botao = raiz.querySelector('[data-abrir]');
+    const painel = raiz.querySelector('[data-painel]');
+    const opcoes = [...raiz.querySelectorAll('input')];
+    const padrao = getComputedStyle(document.documentElement);
+
+    // Amostras da paleta atual usam os valores do CSS.
+    raiz.querySelectorAll('.teste-amostra').forEach((a) => {
+      const chave = [...a.classList].find((c) => c.startsWith('amostra-')).slice(8);
+      a.style.background = a.dataset.cor || padrao.getPropertyValue(`--${chave}`);
+    });
+
+    let anteriores = [];
+    function aplicar(input) {
+      anteriores.forEach((k) => document.documentElement.style.removeProperty(`--${k}`));
+      const cores = JSON.parse(input.dataset.cores);
+      anteriores = Object.keys(cores);
+      for (const [k, v] of Object.entries(cores)) document.documentElement.style.setProperty(`--${k}`, v);
+      try { localStorage.setItem('paleta-teste', input.value); } catch {}
+    }
+
+    let salva = 'ambar';
+    try { salva = localStorage.getItem('paleta-teste') || 'ambar'; } catch {}
+    const inicial = opcoes.find((o) => o.value === salva) || opcoes[0];
+    inicial.checked = true;
+    aplicar(inicial);
+
+    opcoes.forEach((o) => o.addEventListener('change', () => aplicar(o)));
+
+    // Fontes: troca a variável do CSS e baixa a fonte do Google Fonts quando ela não vem com o site.
+    const variavel = { titulo: '--fonte-titulo', ui: '--fonte-ui', texto: '--fonte-texto' };
+    const reserva = { titulo: 'sans-serif', ui: 'ui-monospace, monospace', texto: 'sans-serif' };
+    function carregarFonte(familia) {
+      const nome = familia.replace(/'/g, '');
+      const id = `fonte-${nome.replace(/\s+/g, '-')}`;
+      if (document.getElementById(id)) return;
+      const link = document.createElement('link');
+      link.id = id;
+      link.rel = 'stylesheet';
+      link.href = `https://fonts.googleapis.com/css2?family=${nome.replace(/\s+/g, '+')}:wght@400;700&display=swap`;
+      document.head.append(link);
+    }
+    function aplicarFonte(select) {
+      const chave = select.dataset.fonte;
+      const opcao = select.selectedOptions[0];
+      if (!opcao.dataset.local) carregarFonte(select.value);
+      const raizCss = document.documentElement.style;
+      if (select.selectedIndex === 0) raizCss.removeProperty(variavel[chave]);
+      else raizCss.setProperty(variavel[chave], `${select.value}, ${reserva[chave]}`);
+      if (chave === 'titulo') {
+        const pixel = Boolean(opcao.dataset.pixel);
+        raizCss.setProperty('--peso-titulo', pixel ? '400' : '700');
+        raizCss.setProperty('--ajuste-titulo', pixel ? 'none' : '0.62');
+      }
+      try { localStorage.setItem(`fonte-teste-${chave}`, select.value); } catch {}
+    }
+    raiz.querySelectorAll('[data-fonte]').forEach((select) => {
+      let salva = null;
+      try { salva = localStorage.getItem(`fonte-teste-${select.dataset.fonte}`); } catch {}
+      if (salva && [...select.options].some((o) => o.value === salva)) select.value = salva;
+      aplicarFonte(select);
+      select.addEventListener('change', () => aplicarFonte(select));
+    });
+
+    function alternar(abrir) {
+      painel.hidden = !abrir;
+      botao.setAttribute('aria-expanded', String(abrir));
+      if (abrir) (opcoes.find((o) => o.checked) || opcoes[0]).focus();
+    }
+    botao.addEventListener('click', () => alternar(painel.hidden));
+    raiz.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !painel.hidden) { e.stopPropagation(); alternar(false); botao.focus(); }
+    });
+  })();
+</script>

@@ -1,0 +1,109 @@
+---
+import '@fontsource/press-start-2p/400.css';
+import '@fontsource/silkscreen/400.css';
+import '@fontsource-variable/rubik/wght.css';
+import '../styles/global.css';
+import Icone from '../components/Icone.astro';
+import Wishlist from '../components/Wishlist.astro';
+import TestePaletas from '../components/TestePaletas.astro'; // temporário
+import { pt as t } from '../i18n/pt';
+
+interface Props {
+  titulo?: string;
+  descricao?: string;
+  secao: 'jogos' | 'sobre' | 'conquistas' | 'contato' | null;
+  imagemOg?: string;
+  inicio?: boolean;
+}
+
+const {
+  titulo,
+  descricao = 'Gabriel Torres, programador de jogos. Projetos em Unity, game jams e alguns experimentos para a web.',
+  secao,
+  imagemOg = '/media/playground-rumble-poster.webp',
+  inicio = false,
+} = Astro.props;
+
+const tituloCompleto = titulo ? `${titulo} · ${t.nome}` : `${t.nome}, programador de jogos`;
+const canonica = new URL(Astro.url.pathname, Astro.site);
+const itens = [
+  { id: 'sobre', href: '/sobre/', texto: t.menu.sobre },
+  { id: 'jogos', href: '/', texto: t.menu.jogos },
+  { id: 'conquistas', href: '/conquistas/', texto: t.menu.conquistas },
+  { id: 'contato', href: '/contato/', texto: t.menu.contato },
+] as const;
+---
+<!doctype html>
+<html lang={t.lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{tituloCompleto}</title>
+    <meta name="description" content={descricao} />
+    <meta name="theme-color" content="#181b22" />
+    <link rel="canonical" href={canonica} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={tituloCompleto} />
+    <meta property="og:description" content={descricao} />
+    <meta property="og:url" content={canonica} />
+    <meta property="og:image" content={new URL(imagemOg, Astro.site)} />
+    <meta property="og:locale" content="pt_BR" />
+  </head>
+  <body>
+    <a class="pular" href="#conteudo">{t.pular}</a>
+
+    <header class="hud">
+      <a class="hud-nome" href="/" aria-label={`${t.nome}, início`}>
+        <Icone nome="logo" tamanho={4} />
+      </a>
+      <div class="hud-direita">
+        <nav class="hud-links" aria-label="Contato rápido">
+          <a class="hud-link hud-link-email" href={`mailto:${t.email}`}>
+            <Icone nome="carta" tamanho={2} />
+            <span class="rotulo-link">{t.hud.email}</span>
+            <span class="email-texto">{t.email}</span>
+          </a>
+          <a class="hud-link hud-cv" href={t.curriculo} download>
+            <Icone nome="baixar" tamanho={2} />
+            {t.hud.curriculo}
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <div class="console">
+      <div class:list={['lateral', { 'lateral-inicio': inicio }]}>
+        <div class="cartao-titulo">
+          {inicio
+            ? <h1 class="cartao-nome">{t.nome}</h1>
+            : <p class="cartao-nome">{t.nome}</p>}
+          <p class="cartao-funcao">{t.funcao}</p>
+          <slot name="intro" />
+        </div>
+        <nav class="menu" aria-label="Menu principal">
+          <ul>
+            {itens.map((item) => (
+              <li>
+                <a href={item.href} aria-current={secao === item.id ? 'page' : undefined}>
+                  <Icone nome="cursor" tamanho={3} />
+                  {item.texto}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+        <Wishlist />
+      </div>
+
+      <main id="conteudo" class="tela" tabindex="-1">
+        <slot />
+      </main>
+    </div>
+
+    <footer class="rodape">
+      <p class="legenda"><slot name="legenda" /></p>
+    </footer>
+    <TestePaletas /><!-- temporário: menu de teste de cores -->
+  </body>
+</html>

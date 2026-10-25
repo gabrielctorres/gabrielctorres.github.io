@@ -1,0 +1,72 @@
+---
+import Base from '../layouts/Base.astro';
+import Icone from '../components/Icone.astro';
+import { curriculo, raridade, fimDoPeriodo, NOMES_RARIDADE } from '../lib/curriculo';
+import { pt as t } from '../i18n/pt';
+
+// Formação e cursos saem do currículo em PDF. A raridade vem da duração (veja lib/curriculo.ts).
+const { formacao, cursos } = await curriculo();
+
+const conquistas = [
+  ...formacao.map((f) => ({
+    nome: f.curso,
+    tag: `Formação superior · ${f.periodo}`,
+    desc: f.instituicao,
+    itens: [] as string[],
+    raridade: raridade(null, true),
+    fim: fimDoPeriodo(f.periodo),
+  })),
+  ...cursos.map((c) => ({
+    nome: c.nome,
+    tag: `Curso · ${c.periodo}`,
+    desc: null,
+    itens: c.itens,
+    raridade: raridade(c.meses),
+    fim: fimDoPeriodo(c.periodo),
+  })),
+].sort((a, b) => b.fim - a.fim); // da mais recente para a mais antiga, pelo fim do período
+
+const total = conquistas.length + 1;
+const ordem = ['comum', 'rara', 'epica', 'lendaria'] as const;
+---
+<Base titulo="Conquistas" secao="conquistas">
+  <div class="cabecalho-tela">
+    <h1>Conquistas</h1>
+    <p class="status">Desbloqueadas {conquistas.length}/{total}</p>
+  </div>
+
+  <ul class="legenda-raridade" aria-label="Raridades">
+    {ordem.map((r) => <li class={`raridade-${r}`}><span class="gema" aria-hidden="true"></span>{NOMES_RARIDADE[r]}</li>)}
+  </ul>
+
+  <ul class="conquistas">
+    {conquistas.map((c) => (
+      <li class:list={['conquista', `raridade-${c.raridade}`]}>
+        <span class="conquista-icone">
+          <Icone nome={c.raridade === 'lendaria' ? 'trofeu' : 'estrela'} tamanho={3} />
+        </span>
+        <span class="conquista-texto">
+          <span class="conquista-raridade">{NOMES_RARIDADE[c.raridade]}</span>
+          <span class="conquista-nome">{c.nome}</span>
+          <span class="rotulo">{c.tag}</span>
+          {c.desc && <span class="conquista-desc">{c.desc}</span>}
+          {c.itens.length > 0 && <span class="conquista-desc">{c.itens.join(' · ')}</span>}
+        </span>
+      </li>
+    ))}
+    <li>
+      <a class="conquista conquista-bloqueada" href="/contato/">
+        <span class="conquista-icone"><Icone nome="cadeado" tamanho={3} /></span>
+        <span class="conquista-texto">
+          <span class="conquista-raridade">Bloqueada</span>
+          <span class="conquista-nome">???</span>
+          <span class="conquista-desc">Entrar para um estúdio. Desbloqueie em Contato.</span>
+        </span>
+      </a>
+    </li>
+  </ul>
+
+  <Fragment slot="legenda">
+    <span><kbd>Tab</kbd> {t.teclas.navegar}</span>
+  </Fragment>
+</Base>

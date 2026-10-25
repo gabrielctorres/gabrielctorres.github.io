@@ -1,0 +1,49 @@
+---
+// Ícones em pixel art desenhados como grade: cada "X" vira um pixel.
+interface Props {
+  nome: keyof typeof GRADES;
+  tamanho?: number;
+  class?: string;
+}
+
+const GRADES = {
+  cursor: ['X....', 'XX...', 'XXX..', 'XXXX.', 'XXX..', 'XX...', 'X....'],
+  'seta-esq': ['....X', '...XX', '..XXX', '.XXXX', '..XXX', '...XX', '....X'],
+  baixar: ['..XXX..', '..XXX..', '..XXX..', 'XXXXXXX', '.XXXXX.', '..XXX..', '...X...', '.......', 'XXXXXXX'],
+  externo: ['...XXXX', '.....XX', '....X.X', '...X..X', '..X....', '.X.....', 'X......'],
+  trofeu: ['XXXXXXXXX', 'X.XXXXX.X', 'X.XXXXX.X', '.XXXXXXX.', '..XXXXX..', '...XXX...', '....X....', '..XXXXX..', '..XXXXX..'],
+  estrela: ['....X....', '...XXX...', '...XXX...', 'XXXXXXXXX', '.XXXXXXX.', '..XXXXX..', '..XXXXX..', '.XX...XX.', 'XX.....XX'],
+  cadeado: ['..XXX..', '.X...X.', '.X...X.', '.X...X.', 'XXXXXXX', 'XXX.XXX', 'XXX.XXX', 'XXXXXXX', 'XXXXXXX'],
+  carta: ['XXXXXXXXX', 'XX.....XX', 'X.X...X.X', 'X..X.X..X', 'X...X...X', 'X.......X', 'XXXXXXXXX'],
+  copiar: ['XXXXX..', 'X...X..', 'X.XXXXX', 'X.X...X', 'XXX...X', '..X...X', '..XXXXX'],
+  logo: ['.XXXXX.', 'XX...XX', 'XX.....', 'XX.XXXX', 'XX...XX', 'XX...XX', '.XXXXX.'],
+} as const;
+
+const { nome, tamanho = 3, class: classe } = Astro.props;
+const grade = GRADES[nome];
+const largura = grade[0].length;
+const altura = grade.length;
+let d = '';
+grade.forEach((linha, y) => {
+  // Junta pixels vizinhos da mesma linha num retângulo só.
+  let x = 0;
+  while (x < largura) {
+    if (linha[x] === 'X') {
+      let fim = x;
+      while (fim < largura && linha[fim] === 'X') fim++;
+      d += `M${x} ${y}h${fim - x}v1h-${fim - x}z`;
+      x = fim;
+    } else x++;
+  }
+});
+---
+<svg
+  class:list={['icone', classe]}
+  viewBox={`0 0 ${largura} ${altura}`}
+  width={largura * tamanho}
+  height={altura * tamanho}
+  shape-rendering="crispEdges"
+  fill="currentColor"
+  aria-hidden="true"
+  focusable="false"
+><path d={d} /></svg>

@@ -1,0 +1,22 @@
+---
+import { Image } from 'astro:assets';
+import Icone from './Icone.astro';
+import capa from '../content/jogos/playground-rumble/capa.png';
+import { pt as t } from '../i18n/pt';
+---
+<aside class="wishlist" aria-labelledby="wishlist-titulo">
+  <a class="wishlist-capa" href="/projetos/playground-rumble/" tabindex="-1" aria-hidden="true">
+    <Image src={capa} alt="" widths={[300, 600]} sizes="(max-width: 860px) 120px, 260px" format="webp" />
+  </a>
+  <div class="wishlist-texto">
+    <p class="status">Em desenvolvimento</p>
+    <h2 class="wishlist-titulo" id="wishlist-titulo">
+      <a href="/projetos/playground-rumble/">Playground Rumble</a>
+    </h2>
+    <p>Adicione à sua wishlist na Steam para acompanhar o lançamento.</p>
+    <a class="botao botao-primario wishlist-botao" href={t.links.steam} target="_blank" rel="noopener">
+      Wishlist na Steam
+      <Icone nome="externo" tamanho={2} />
+    </a>
+  </div>
+</aside>

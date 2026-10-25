@@ -1,0 +1,72 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Icone from '../components/Icone.astro';
+import IconeApp from '../components/IconeApp.astro';
+import foto from '../assets/gabriel.jpg';
+import { curriculo } from '../lib/curriculo';
+import { pt as t } from '../i18n/pt';
+
+const { experiencias } = await curriculo();
+
+const ferramentas = [
+  { nome: 'Unity', icone: 'unity' },
+  { nome: 'C#', icone: 'csharp' },
+  { nome: 'Git', icone: 'git' },
+  { nome: 'Aseprite', icone: 'aseprite' },
+] as const;
+---
+<Base titulo="Sobre" secao="sobre">
+  <section class="caixa personagem" aria-labelledby="sobre-titulo">
+    <Image src={foto} alt="Foto do Gabriel" widths={[180, 321]} sizes="180px" class="personagem-foto" loading="eager" />
+    <div class="personagem-dados">
+      <h1 id="sobre-titulo" class="sr-only">Sobre mim</h1>
+      <div class="bio">
+        <p>Sou um programador de jogos buscando oportunidades pra crescer na área enquanto desenvolvo meu próprio jogo.</p>
+        <p>Sou super criativo e estou sempre tendo novas ideias (sério, tenho muitos documentos de jogos no meu Drive) e adoro escrever código e criar jogos.</p>
+        <p>Essa área me cativou desde que eu tinha 13 anos criando meus servidores de Minecraft e tentando programar plugins em Java (não deu muito certo), até que descobri a Unity e me encontrar de vez na programação e na área de games.</p>
+        <p>Se quiser ver meus projetos, dá uma olhada abaixo e, se curtir, ajuda lá adicionando Playground Rumble na sua wishlist da Steam!</p>
+      </div>
+      <p class="status">Aberto a oportunidades</p>
+    </div>
+  </section>
+
+  <section aria-labelledby="inventario-titulo" class="bloco">
+    <h2 class="titulo-secao" id="inventario-titulo">Inventário</h2>
+    <ul class="inventario">
+      {ferramentas.map((f) => (
+        <li>
+          <IconeApp nome={f.icone} />
+          <span class="item-nome">{f.nome}</span>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section aria-labelledby="experiencias-titulo" class="bloco">
+    <h2 class="titulo-secao" id="experiencias-titulo">Experiências</h2>
+    <ol class="experiencias">
+      {experiencias.map((e, i) => (
+        <li class:list={['caixa', 'experiencia', { atual: i === 0 }]}>
+          <div class="experiencia-topo">
+            <h3>{e.cargo}</h3>
+            <p class="rotulo">{[e.empresa, e.periodo].filter(Boolean).join(' · ')}</p>
+          </div>
+          <p class="experiencia-texto">{e.texto}</p>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <div class="botoes">
+    <a class="botao botao-primario" href={t.curriculo} download>
+      <Icone nome="baixar" tamanho={2} />
+      Baixar currículo
+    </a>
+    <a class="botao" href="/contato/">Falar comigo</a>
+  </div>
+
+  <Fragment slot="legenda">
+    <span><kbd>Tab</kbd> {t.teclas.navegar}</span>
+  </Fragment>
+</Base>

@@ -1,0 +1,18 @@
+---
+import Base from '../layouts/Base.astro';
+import { pt as t } from '../i18n/pt';
+---
+<Base titulo="Fase não encontrada" secao={null}>
+  <section class="caixa fim-de-jogo">
+    <h1>Fase não encontrada</h1>
+    <p>Esse endereço não existe ou mudou de lugar. Os projetos estão todos na tela de jogos.</p>
+    <div class="botoes">
+      <a class="botao botao-primario" href="/">Continuar</a>
+      <a class="botao" href="/contato/">Contato</a>
+    </div>
+  </section>
+
+  <Fragment slot="legenda">
+    <span><kbd>Tab</kbd> {t.teclas.navegar}</span>
+  </Fragment>
+</Base>

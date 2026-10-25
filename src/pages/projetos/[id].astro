@@ -1,0 +1,232 @@
+---
+import { Image } from 'astro:assets';
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Icone from '../../components/Icone.astro';
+import { jogos, ano, video, type Jogo } from '../../lib/jogos';
+import { pt as t } from '../../i18n/pt';
+
+export async function getStaticPaths() {
+  const lista = await jogos();
+  return lista.map((p, i) => ({
+    params: { id: p.id },
+    props: { p, anterior: lista[i - 1] ?? null, proximo: lista[i + 1] ?? null },
+  }));
+}
+
+interface Props {
+  p: Jogo;
+  anterior: Jogo | null;
+  proximo: Jogo | null;
+}
+
+const { p, anterior, proximo } = Astro.props;
+const d = p.data;
+const { Content } = await render(p);
+const temHistoria = Boolean(p.body?.trim());
+const v = video(p);
+
+const galeria = [
+  { id: 'imagem', rotulo: 'Imagem', src: d.capa, alt: d.capaAlt, video: false },
+  ...(d.tela2 ? [{ id: 'imagem-2', rotulo: 'Imagem 2', src: d.tela2, alt: d.tela2Alt ?? '', video: false }] : []),
+  ...(v ? [{ id: 'gameplay', rotulo: 'Gameplay', src: d.capa, alt: d.capaAlt, video: true }] : []),
+];
+
+const ficha = [
+  ['Tipo', d.tipo],
+  ['Ano', ano(p)],
+  ['Status', d.status],
+  ['Engine', d.engine],
+  ['Plataforma', d.plataforma],
+  ['Contexto', d.contexto],
+  ['Papel', d.papel],
+  ['Equipe', d.equipe],
+  ['Duração', d.duracao],
+  ['Créditos', d.creditos],
+].filter(([, valor]) => valor);
+
+const links = [
+  d.links.steam && { href: d.links.steam, texto: t.botoes.wishlist, primario: true },
+  d.links.jogar && { href: d.links.jogar, texto: t.botoes.jogar, primario: true },
+  d.links.site && { href: d.links.site, texto: t.botoes.site, primario: !d.links.jogar && !d.links.steam },
+  d.links.github && { href: d.links.github, texto: t.botoes.codigo, primario: false },
+].filter(Boolean) as { href: string; texto: string; primario: boolean }[];
+---
+<Base titulo={d.titulo} descricao={d.resumo} secao="jogos" imagemOg={d.capa.src}>
+  <nav class="trilha" aria-label="Você está em">
+    <ol>
+      <li><a href={`/#${p.id}`}>{t.menu.jogos}</a></li>
+      <li aria-current="page">{d.titulo}</li>
+    </ol>
+  </nav>
+
+  <h1 class="jogo-titulo">{d.titulo}</h1>
+  {d.status && <p class="status">{d.status}</p>}
+
+  <section class="galeria" aria-label="Galeria">
+    {galeria.map((g, i) => (
+      <div class="galeria-item" id={`galeria-${g.id}`} data-item={g.id} hidden={i > 0}>
+        <div class="visor" data-visor>
+          <Image
+            src={g.src}
+            alt={g.alt}
+            widths={[480, 960, 1440].filter((w) => w <= g.src.width)}
+            sizes="(max-width: 860px) 100vw, (max-width: 1360px) 70vw, 960px"
+            format="webp"
+            loading={i === 0 ? 'eager' : 'lazy'}
+            fetchpriority={i === 0 ? 'high' : undefined}
+          />
+          {g.video && v && (
+            <video
+              muted
+              loop
+              playsinline
+              preload="none"
+              aria-label={v.alt}
+              poster={v.poster}
+              data-video
+              data-webm={v.webm}
+              data-mp4={v.mp4}
+            />
+          )}
+          <span class="visor-selo">{i + 1}/{galeria.length}</span>
+        </div>
+      </div>
+    ))}
+    {galeria.length > 1 && (
+      <div class="galeria-miniaturas" role="group" aria-label="Escolher mídia">
+        {galeria.map((g, i) => (
+          <button
+            type="button"
+            class="miniatura"
+            aria-pressed={i === 0 ? 'true' : 'false'}
+            aria-controls={`galeria-${g.id}`}
+            data-miniatura={g.id}
+          >
+            {g.rotulo}
+          </button>
+        ))}
+      </div>
+    )}
+  </section>
+
+  {links.length > 0 && (
+    <div class="botoes">
+      {links.map((l) => (
+        <a class:list={['botao', { 'botao-primario': l.primario }]} href={l.href} target="_blank" rel="noopener">
+          {l.texto}
+          <Icone nome="externo" tamanho={2} />
+        </a>
+      ))}
+    </div>
+  )}
+
+  <div class="jogo-corpo">
+    <div class="caixa texto-jogo">
+      <section class="trecho" aria-labelledby="sobre-projeto">
+        <h2 class="titulo-secao" id="sobre-projeto">Sobre o projeto</h2>
+        <p class="destaque">{d.descricao}</p>
+      </section>
+
+      {d.programei && (
+        <section class="trecho" aria-labelledby="programei">
+          <h2 class="titulo-secao" id="programei">O que eu programei</h2>
+          <ul class="lista-feitos">
+            {d.programei.map((item) => (
+              <li><Icone nome="cursor" tamanho={2} /><span>{item}</span></li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      {temHistoria && (
+        <section class="trecho" aria-labelledby="como-foi">
+          <h2 class="titulo-secao" id="como-foi">Como foi fazer</h2>
+          <div class="prosa"><Content /></div>
+        </section>
+      )}
+    </div>
+
+    <aside class="caixa ficha" aria-labelledby="ficha-titulo">
+      <h2 class="titulo-secao" id="ficha-titulo">Ficha</h2>
+      <dl>
+        {ficha.map(([rotulo, valor]) => (
+          <div>
+            <dt>{rotulo}</dt>
+            <dd>{valor}</dd>
+          </div>
+        ))}
+      </dl>
+    </aside>
+  </div>
+
+  <nav class="paginador" aria-label="Outros projetos">
+    {anterior && (
+      <a href={`/projetos/${anterior.id}/`} rel="prev">
+        <span class="rotulo"><Icone nome="seta-esq" tamanho={2} /> Anterior</span>
+        <span class="paginador-nome">{anterior.data.titulo}</span>
+      </a>
+    )}
+    {proximo && (
+      <a class="proximo" href={`/projetos/${proximo.id}/`} rel="next">
+        <span class="rotulo">Próximo <Icone nome="cursor" tamanho={2} /></span>
+        <span class="paginador-nome">{proximo.data.titulo}</span>
+      </a>
+    )}
+  </nav>
+
+  <Fragment slot="legenda">
+    <span><kbd>Tab</kbd> {t.teclas.navegar}</span>
+    <span><kbd>Esc</kbd> {t.teclas.voltar} para os jogos</span>
+  </Fragment>
+</Base>
+
+<script>
+  const itens = [...document.querySelectorAll<HTMLElement>('[data-item]')];
+  const miniaturas = [...document.querySelectorAll<HTMLButtonElement>('[data-miniatura]')];
+  const calmo = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  function carregar(video: HTMLVideoElement) {
+    if (video.dataset.carregado) return;
+    for (const [tipo, chave] of [['video/webm', 'webm'], ['video/mp4', 'mp4']]) {
+      if (!video.dataset[chave]) continue;
+      const fonte = document.createElement('source');
+      fonte.type = tipo;
+      fonte.src = video.dataset[chave]!;
+      video.append(fonte);
+    }
+    video.dataset.carregado = '1';
+    video.classList.add('tocando');
+    video.load();
+  }
+
+  miniaturas.forEach((m) => {
+    m.addEventListener('click', () => {
+      miniaturas.forEach((x) => x.setAttribute('aria-pressed', String(x === m)));
+      for (const item of itens) {
+        const ativo = item.dataset.item === m.dataset.miniatura;
+        item.hidden = !ativo;
+        const video = item.querySelector<HTMLVideoElement>('[data-video]');
+        if (!video) continue;
+        if (!ativo) { video.pause(); continue; }
+        carregar(video);
+        // Com movimento reduzido o vídeo não toca sozinho: ganha controles.
+        if (calmo.matches) video.controls = true;
+        else video.play().catch(() => {});
+      }
+      const visor = itens.find((x) => !x.hidden)?.querySelector('[data-visor]');
+      if (visor) {
+        visor.classList.remove('trocando');
+        void (visor as HTMLElement).offsetWidth;
+        visor.classList.add('trocando');
+      }
+    });
+  });
+
+  document.addEventListener('keydown', (e) => {
+    const alvo = e.target as HTMLElement;
+    if (e.key === 'Escape' && !alvo.closest('input, textarea, video')) {
+      location.href = (document.querySelector('.trilha a') as HTMLAnchorElement).href;
+    }
+  });
+</script>
