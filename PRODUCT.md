@@ -47,11 +47,11 @@ Um programador que mostra engenharia, não só jogos prontos: cada projeto diz o
 - Voz: português do Brasil, primeira pessoa, tom simples e direto, sem slogans nem autopromoção inflada.
 - Logo "G" em pixel art âmbar (`src/components/Icone.astro`, nome `logo`; o favicon é o mesmo desenho).
 - Status do Rumble sempre "Em desenvolvimento, wishlist aberta na Steam", sem datas.
-- Em 25/10/2026 o Gabriel escolheu o conceito 17 do canvas "Portfólio Game Dev — Conceitos": o site como console portátil (layout do 15A) em todas as páginas, com as cores do conceito 02. Páginas: Jogos (seleção de cartuchos), página do jogo, Sobre, Conquistas (só marcos reais do acervo) e Contato (formulário que abre o app de e-mail). Fontes: pixel nos títulos, Rubik no texto corrido.
+- Em 25/10/2026 o Gabriel escolheu o conceito 17 do canvas "Portfólio Game Dev — Conceitos": o site como console portátil (layout do 15A) em todas as páginas, com as cores do conceito 02. Páginas: Jogos (seleção de cartuchos), página do jogo, Sobre, Conquistas (formação e cursos do currículo) e Contato (formulário que abre o app de e-mail). Fontes: pixel nos títulos, Rubik no texto corrido.
 
 ## Evidence on Hand
 
-- 7 projetos em `src/data/projetos.json` (fonte original em `_acervo/`, somente leitura): Playground Rumble, Order UP!, Birl.com, Arrai Defensivo, Alexandre: Em Busca da Relíquia Perdida, Guerra dos Feriados, Random Commander.
+- 8 projetos, um por pasta em `src/content/jogos/`: Clube do Jogo, Partitura de Conflito, Order UP!, Arrai Defensivo, Playground Rumble, Alexandre: Em Busca da Relíquia Perdida, Guerra dos Feriados, Random Commander.
 - Capa de cada jogo na pasta dele em `src/content/jogos/`; foto do Gabriel em `src/assets/gabriel.jpg` (avatar do GitHub); vídeos MP4 + WebM do Rumble, Arrai, Alexandre e Guerra; currículo em `public/curriculo-gabriel-torres.pdf`.
 - Não existem depoimentos, números de vendas, prêmios ou métricas. Não inventar.
 

@@ -12,13 +12,12 @@ Quando uma decisão do grill-me for respondida, atualize o PRD **e** esta págin
 
 ## Ruptura com o site antigo
 - **Código do site anterior não é reaproveitado** (nada de copiar HTML, CSS, JS ou nomes de classe). Desde 22/10/2026 o Gabriel liberou o **layout e o visual antigos como referência**: card como objeto com imagem em cima, fonte Rubik, página escura com planos navy, seções separadas só por espaço.
-- O site antigo deixa só **conteúdo**: textos, dados dos projetos e mídia, todos em [`_acervo/`](_acervo/ACERVO.md).
-- **Nunca apagar nem editar `_acervo/`.** É fonte somente leitura. Para usar um asset, converta ou copie para a pasta do site novo.
+- O acervo do site antigo foi apagado em 25/10/2026, a pedido do Gabriel. O conteúdo que importava já está nas pastas do site novo.
 
 ## Conteúdo e texto
 - Português do Brasil, primeira pessoa, na voz do Gabriel: tom simples, conversa direta, sem slogans e sem autopromoção inflada.
-- Não inventar fatos: datas, papéis, números, links e créditos vêm do acervo ou do Gabriel. Se faltar dado, deixe o campo vazio e pergunte.
-- Status do Playground Rumble: "Em desenvolvimento com wishlist aberta na Steam", sem datas. Textos sem travessão, dois-pontos de efeito, ponto e vírgula e vírgulas sobrando (frases curtas; vírgula só em enumeração). A seção "O Futuro" ("meta 2025") do acervo não entra. O Random Commander não tem data nem link.
+- Não inventar fatos: datas, papéis, números, links e créditos vêm do Gabriel, do currículo ou do que já está no site. Se faltar dado, deixe o campo vazio e pergunte.
+- Status do Playground Rumble: "Em desenvolvimento com wishlist aberta na Steam", sem datas. Textos sem travessão, dois-pontos de efeito, ponto e vírgula e vírgulas sobrando (frases curtas; vírgula só em enumeração). O Random Commander não tem data nem link.
 - Idioma: V1 só em PT, com a estrutura pronta para EN na V1.1.
 - Todo projeto mostra **o que o Gabriel programou** (sistemas, não só "fiz um jogo"), mais papel, equipe e duração.
 - Projetos em equipe trazem os créditos dos colegas.
@@ -55,5 +54,5 @@ Quando uma decisão do grill-me for respondida, atualize o PRD **e** esta págin
 
 ## Git
 - Commits em pt-BR, curtos e no imperativo ("adiciona página de projeto").
-- Não commitar mídia original pesada fora de `_acervo/`.
+- Não commitar mídia original pesada (GIF, vídeo bruto). Só os arquivos já convertidos.
 - Commit e push só quando o Gabriel pedir.

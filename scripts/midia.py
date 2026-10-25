@@ -1,4 +1,4 @@
-"""Gera a mídia do site a partir de um arquivo de origem (normalmente do _acervo/).
+"""Gera a mídia do site a partir de um arquivo de origem.
 
 Capas de jogo não precisam deste script: o Astro processa a imagem da pasta do jogo.
 Use --video para o gameplay, com o <nome> igual ao id do jogo.
@@ -11,7 +11,6 @@ Imagens viram WebP em public/media/<nome>-<largura>.webp (nunca maiores que a or
 --plano usa reamostragem "nearest" (pixel art e interface ficam nítidas).
 --video converte GIF ou WebP animado em MP4 (H.264) + WebM (VP9), sem áudio,
 e grava um pôster WebP. Nenhum arquivo passa de 2 MB.
-O _acervo/ só é lido, nunca alterado.
 """
 
 import argparse
