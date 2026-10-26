@@ -5,6 +5,8 @@ import '@fontsource-variable/nunito-sans/wght.css';
 import '../styles/global.css';
 import Icone from '../components/Icone.astro';
 import Wishlist from '../components/Wishlist.astro';
+import { getImage } from 'astro:assets';
+import foto from '../assets/gabriel.jpg';
 import { pt as t } from '../i18n/pt';
 
 interface Props {
@@ -19,12 +21,14 @@ const {
   titulo,
   descricao = 'Gabriel Torres, programador de jogos. Projetos em Unity, game jams e alguns experimentos para a web.',
   secao,
-  imagemOg = '/media/playground-rumble-poster.webp',
+  imagemOg,
   inicio = false,
 } = Astro.props;
 
-const tituloCompleto = titulo ? `${titulo} · ${t.nome}` : `${t.nome}, programador de jogos`;
+const tituloCompleto = titulo ? `${titulo} · ${t.nome}` : `Portfólio · ${t.nome}`;
 const canonica = new URL(Astro.url.pathname, Astro.site);
+// A prévia do link (WhatsApp, Discord, LinkedIn) mostra a foto do Sobre, a menos que a página passe outra imagem.
+const fotoOg = await getImage({ src: foto, width: 321, format: 'jpg' });
 const itens = [
   { id: 'sobre', href: '/', texto: t.menu.sobre },
   { id: 'jogos', href: '/jogos/', texto: t.menu.jogos },
@@ -46,7 +50,7 @@ const itens = [
     <meta property="og:title" content={tituloCompleto} />
     <meta property="og:description" content={descricao} />
     <meta property="og:url" content={canonica} />
-    <meta property="og:image" content={new URL(imagemOg, Astro.site)} />
+    <meta property="og:image" content={new URL(imagemOg ?? fotoOg.src, Astro.site)} />
     <meta property="og:locale" content="pt_BR" />
   </head>
   <body>
@@ -63,8 +67,8 @@ const itens = [
             <span class="rotulo-link">{t.hud.email}</span>
             <span class="email-texto">{t.email}</span>
           </a>
-          <a class="hud-link hud-cv" href={t.curriculo} download>
-            <Icone nome="baixar" tamanho={2} />
+          <a class="hud-link hud-cv" href={t.curriculo} target="_blank" rel="noopener">
+            <Icone nome="externo" tamanho={2} />
             {t.hud.curriculo}
           </a>
         </nav>
