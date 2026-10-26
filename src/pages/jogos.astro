@@ -1,0 +1,186 @@
+---
+import Base from '../layouts/Base.astro';
+import { Image } from 'astro:assets';
+import Icone from '../components/Icone.astro';
+import { jogos, meta, acaoExterna, video } from '../lib/jogos';
+import { pt as t } from '../i18n/pt';
+
+const lista = await jogos();
+const total = lista.length;
+---
+<Base titulo="Jogos" secao="jogos">
+  <p slot="intro" class="cartao-intro">
+    Aqui estão meus projetos. A maioria são jogos que fiz em game jams. Também desenvolvo aplicações web para uso
+    pessoal como projetos de RPG.
+  </p>
+
+  <h1 class="sr-only">Jogos</h1>
+
+  <div class="contador rotulo">
+    <h2 class="rotulo" id="selecao-titulo">Selecione um projeto</h2>
+    <span aria-hidden="true"><span data-indice>1</span>/{total}</span>
+  </div>
+
+  <div class="selecao">
+    {lista.map((p, i) => {
+      const acao = acaoExterna(p);
+      const v = video(p);
+      return (
+        <article class="painel" id={`painel-${p.id}`} data-painel={p.id} hidden={i > 0} aria-label={p.data.titulo}>
+          <div class="visor" data-visor>
+            <Image
+              src={p.data.capa}
+              alt={p.data.capaAlt}
+              widths={[480, 960, 1440].filter((w) => w <= p.data.capa.width)}
+              sizes="(max-width: 860px) 100vw, (max-width: 1100px) 60vw, 560px"
+              format="webp"
+              loading={i === 0 ? 'eager' : 'lazy'}
+              fetchpriority={i === 0 ? 'high' : undefined}
+            />
+            {v && (
+              <video
+                muted
+                loop
+                playsinline
+                preload="none"
+                aria-label={v.alt}
+                data-video
+                data-webm={v.webm}
+                data-mp4={v.mp4}
+              />
+            )}
+            <span class="visor-selo">{p.data.selo}</span>
+          </div>
+          <div class="painel-info">
+            <h2>{p.data.titulo}</h2>
+            <p class="rotulo">{meta(p)}</p>
+            {p.data.status && <p class="status">{p.data.status}</p>}
+            <p class="caixa">{p.data.resumo}</p>
+            <div class="botoes">
+              <a class="botao botao-primario" href={`/projetos/${p.id}/`}>
+                {t.botoes.abrir}<span class="sr-only"> {p.data.titulo}</span>
+              </a>
+              {acao && (
+                <a class="botao" href={acao.href} target="_blank" rel="noopener">
+                  {acao.texto}
+                  <Icone nome="externo" tamanho={2} />
+                </a>
+              )}
+            </div>
+          </div>
+        </article>
+      );
+    })}
+  </div>
+
+  <div class="cartuchos" role="group" aria-labelledby="selecao-titulo" data-cartuchos>
+    {lista.map((p, i) => (
+      <button
+        type="button"
+        class="cartucho"
+        aria-pressed={i === 0 ? 'true' : 'false'}
+        aria-controls={`painel-${p.id}`}
+        tabindex={i === 0 ? 0 : -1}
+        data-cartucho={p.id}
+        data-href={`/projetos/${p.id}/`}
+      >
+        <Image src={p.data.capa} alt="" widths={[320, 480].filter((w) => w <= p.data.capa.width)} sizes="180px" format="webp" />
+        <span class="cartucho-texto">
+          <span class="cartucho-num">{String(i + 1).padStart(2, '0')}</span>
+          <span>{p.data.titulo}</span>
+        </span>
+      </button>
+    ))}
+  </div>
+
+  <noscript>
+    <style>
+      .painel[hidden] { display: grid; }
+      .cartuchos, .contador { display: none; }
+      .selecao { display: grid; gap: 48px; }
+    </style>
+  </noscript>
+
+  <Fragment slot="legenda">
+    <span><kbd>←</kbd><kbd>→</kbd> {t.teclas.escolher}</span>
+    <span><kbd>Enter</kbd> {t.teclas.abrir}</span>
+    <span><kbd>Tab</kbd> {t.teclas.navegar}</span>
+  </Fragment>
+</Base>
+
+<script>
+  const botoes = [...document.querySelectorAll<HTMLButtonElement>('[data-cartucho]')];
+  const paineis = [...document.querySelectorAll<HTMLElement>('[data-painel]')];
+  const indice = document.querySelector('[data-indice]');
+  const calmo = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let atual = 0;
+
+  // Vídeo: só carrega quando o painel está selecionado e visível, e nunca com movimento reduzido.
+  const observador = new IntersectionObserver((entradas) => {
+    for (const e of entradas) {
+      const video = e.target.querySelector<HTMLVideoElement>('[data-video]');
+      if (!video) continue;
+      if (e.isIntersecting && !(e.target as HTMLElement).closest('[hidden]')) tocar(video);
+      else video.pause();
+    }
+  }, { threshold: 0.4 });
+
+  function tocar(video: HTMLVideoElement) {
+    if (calmo.matches) return;
+    if (!video.dataset.carregado) {
+      for (const [tipo, chave] of [['video/webm', 'webm'], ['video/mp4', 'mp4']]) {
+        if (!video.dataset[chave]) continue;
+        const fonte = document.createElement('source');
+        fonte.type = tipo;
+        fonte.src = video.dataset[chave]!;
+        video.append(fonte);
+      }
+      video.dataset.carregado = '1';
+      video.addEventListener('playing', () => video.classList.add('tocando'), { once: true });
+      video.load();
+    }
+    video.play().catch(() => {});
+  }
+
+  function selecionar(i: number, focar = false) {
+    const total = botoes.length;
+    i = (i + total) % total;
+    paineis[atual].querySelector<HTMLVideoElement>('[data-video]')?.pause();
+    botoes.forEach((b, j) => {
+      b.setAttribute('aria-pressed', String(j === i));
+      b.tabIndex = j === i ? 0 : -1;
+    });
+    paineis.forEach((p, j) => (p.hidden = j !== i));
+    if (indice) indice.textContent = String(i + 1);
+    const visor = paineis[i].querySelector('[data-visor]');
+    if (visor && i !== atual) {
+      visor.classList.remove('trocando');
+      void (visor as HTMLElement).offsetWidth;
+      visor.classList.add('trocando');
+    }
+    observador.unobserve(paineis[i]);
+    observador.observe(paineis[i]);
+    atual = i;
+    if (focar) botoes[i].focus();
+    history.replaceState(null, '', `#${botoes[i].dataset.cartucho}`);
+  }
+
+  botoes.forEach((b, i) => {
+    // Clicar (ou dar Enter) no cartucho já escolhido abre o projeto.
+    b.addEventListener('click', () => (i === atual ? (location.href = b.dataset.href!) : selecionar(i)));
+  });
+
+  document.querySelector('[data-cartuchos]')?.addEventListener('keydown', (ev) => {
+    const e = ev as KeyboardEvent;
+    const passos: Record<string, number> = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 };
+    if (e.key in passos) selecionar(atual + passos[e.key], true);
+    else if (e.key === 'Home') selecionar(0, true);
+    else if (e.key === 'End') selecionar(botoes.length - 1, true);
+    else return;
+    e.preventDefault();
+  });
+
+  const inicial = botoes.findIndex((b) => `#${b.dataset.cartucho}` === location.hash);
+  if (inicial > 0) selecionar(inicial);
+  else observador.observe(paineis[0]);
+</script>

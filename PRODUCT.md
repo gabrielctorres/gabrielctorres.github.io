@@ -29,7 +29,7 @@ Um programador que mostra engenharia, não só jogos prontos: cada projeto diz o
 ## Capabilities and Constraints
 
 - Astro com saída estática e JS vanilla, sem framework de UI e sem engine. GitHub Pages em `gabrielctorres.github.io`, deploy por GitHub Actions. Sem backend, cookies ou analytics de terceiros.
-- Rotas: `/` (seleção de jogos), `/projetos/<id>/`, `/sobre/`, `/conquistas/` e `/contato/`.
+- Rotas: `/` (Sobre, página inicial), `/jogos/` (seleção de jogos), `/projetos/<id>/`, `/conquistas/` e `/contato/`.
 - Currículo (PDF), e-mail e GitHub acessíveis em qualquer ponto do site.
 - Grade única de projetos, do mais recente para o mais antigo. Sem abas, tags ou filtros.
 - Navegação completa por teclado (setas nos cards), foco sempre visível.
@@ -45,9 +45,9 @@ Um programador que mostra engenharia, não só jogos prontos: cada projeto diz o
 
 - Nome: Gabriel Torres. Título: "Programador de jogos".
 - Voz: português do Brasil, primeira pessoa, tom simples e direto, sem slogans nem autopromoção inflada.
-- Logo "G" em pixel art âmbar (`src/components/Icone.astro`, nome `logo`; o favicon é o mesmo desenho).
+- Logo "G" em pixel art na cor de destaque (`src/components/Icone.astro`, nome `logo`); o favicon é o mesmo desenho, em lima sobre fundo transparente).
 - Status do Rumble sempre "Em desenvolvimento, wishlist aberta na Steam", sem datas.
-- Em 25/10/2026 o Gabriel escolheu o conceito 17 do canvas "Portfólio Game Dev — Conceitos": o site como console portátil (layout do 15A) em todas as páginas, com as cores do conceito 02. Páginas: Jogos (seleção de cartuchos), página do jogo, Sobre, Conquistas (formação e cursos do currículo) e Contato (formulário que abre o app de e-mail). Fontes: pixel nos títulos, Rubik no texto corrido.
+- Em 25/10/2026 o Gabriel escolheu o conceito 17 do canvas "Portfólio Game Dev — Conceitos": o site como console portátil (layout do 15A) em todas as páginas, com as cores do conceito 02. Páginas: Jogos (seleção de cartuchos), página do jogo, Sobre, Conquistas (formação e cursos do currículo) e Contato (formulário que abre o app de e-mail). Fontes: pixel nos títulos, Rubik no texto corrido. Ainda em 25/10/2026 ele fixou a paleta "Grafite e lima" (neutros do conceito 02 com destaque verde-lima #9BE15D no lugar do âmbar) e trocou as fontes para Space Mono nos rótulos e Nunito Sans no texto corrido.
 
 ## Evidence on Hand
 

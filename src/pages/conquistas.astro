@@ -12,15 +12,13 @@ const conquistas = [
     nome: f.curso,
     tag: `Formação superior · ${f.periodo}`,
     desc: f.instituicao,
-    itens: [] as string[],
     raridade: raridade(null, true),
     fim: fimDoPeriodo(f.periodo),
   })),
   ...cursos.map((c) => ({
     nome: c.nome,
     tag: `Curso · ${c.periodo}`,
-    desc: null,
-    itens: c.itens,
+    desc: c.instituicao,
     raridade: raridade(c.meses),
     fim: fimDoPeriodo(c.periodo),
   })),
@@ -49,8 +47,7 @@ const ordem = ['comum', 'rara', 'epica', 'lendaria'] as const;
           <span class="conquista-raridade">{NOMES_RARIDADE[c.raridade]}</span>
           <span class="conquista-nome">{c.nome}</span>
           <span class="rotulo">{c.tag}</span>
-          {c.desc && <span class="conquista-desc">{c.desc}</span>}
-          {c.itens.length > 0 && <span class="conquista-desc">{c.itens.join(' · ')}</span>}
+          <span class="conquista-desc">{c.desc}</span>
         </span>
       </li>
     ))}

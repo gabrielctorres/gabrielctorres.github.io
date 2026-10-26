@@ -28,8 +28,8 @@ Quando uma decisão do grill-me for respondida, atualize o PRD **e** esta págin
 
 ## Visual
 - **Desde 25/10/2026 o visual é o conceito 17 ("Portátil" em todas as páginas, cores do conceito 02)**, escolhido pelo Gabriel. Substitui a paleta navy/pêssego e a regra de separar só por espaço. Detalhes e tokens em [DESIGN.md](DESIGN.md).
-- Cores: fundo #101217, painel #181B22, bordas #2A2F3A / #3A4150 / #6B7385, texto #C9CDD6 / #EEF0F4 / #8A91A1, **âmbar #F2B544 como única cor de destaque** (seleção, ação, status), foco #EEF0F4. Nada de rosa. Tokens em `:root` de `src/styles/global.css`; nenhuma cor hex solta em componente.
-- Fontes: Press Start 2P (títulos, menu, botões; nunca em maiúsculas forçadas, ela não tem maiúsculas acentuadas), Silkscreen (rótulos), Rubik (texto corrido). Bordas de 4 px, cantos retos.
+- Cores: fundo #101217, painel #181B22, bordas #2A2F3A / #3A4150 / #6B7385, texto #C9CDD6 / #EEF0F4 / #8A91A1, **verde-lima #9BE15D como única cor de destaque** (seleção, ação, status; paleta "Grafite e lima", fixada em 25/10/2026; tokens `--destaque`), foco #EEF0F4. Nada de rosa. Tokens em `:root` de `src/styles/global.css`; nenhuma cor hex solta em componente.
+- Fontes: Press Start 2P (títulos, menu, botões; nunca em maiúsculas forçadas, ela não tem maiúsculas acentuadas), Space Mono (rótulos), Nunito Sans (texto corrido). Bordas de 4 px, cantos retos.
 - A interface de jogo precisa ter função (foco de seleção, stats de fase, HUD). Proibido: clichê "gamer" decorativo, barras de nível de skill, gradientes decorativos, intro ou loading falso, som automático.
 - Uma ideia memorável por página. O resto fica quieto.
 

@@ -2,17 +2,22 @@
 // Experiências (Sobre) e Conquistas (Formação + Cursos) saem daqui.
 import { readFile } from 'node:fs/promises';
 import { getDocumentProxy } from 'unpdf';
-import extras from '../data/experiencias-extras.json';
 
 export const ARQUIVO = 'public/curriculo-gabriel-torres.pdf';
 
-export type Experiencia = { cargo: string; empresa: string | null; periodo: string; texto: string };
-export type Curso = { nome: string; periodo: string; itens: string[]; meses: number | null };
+export type Experiencia = { cargo: string; empresa: string | null; detalhe: string | null; periodo: string; itens: string[] };
+export type Curso = { nome: string; instituicao: string; periodo: string; meses: number | null };
 export type Formacao = { curso: string; instituicao: string; periodo: string };
 export type Curriculo = { formacao: Formacao[]; cursos: Curso[]; experiencias: Experiencia[] };
 
-const SECOES = { 'Resumo': 'resumo', 'Formação Superior': 'formacao', 'Cursos Complementares': 'cursos', 'Experiência': 'experiencias' } as const;
-const MESES = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'];
+const SECOES = {
+  'RESUMO': null,
+  'HABILIDADES': null,
+  'EXPERIÊNCIA': 'experiencias',
+  'PROJETOS': null,
+  'FORMAÇÃO ACADÊMICA': 'formacao',
+  'CURSOS': 'cursos',
+} as const;
 
 async function linhas(): Promise<string[]> {
   const pdf = await getDocumentProxy(new Uint8Array(await readFile(ARQUIVO)));
@@ -31,29 +36,29 @@ async function linhas(): Promise<string[]> {
   return todas.filter(Boolean);
 }
 
-// "mar. de 2025 – mai. de 2025" → 3 meses (contando os dois meses das pontas).
+// Datas do PDF em "MM/AAAA" ou só "AAAA", como número (ano * 12 + mês).
+// Só o ano conta como janeiro no início do período e dezembro no fim.
+function datas(periodo: string): { inicio: number; fim: number }[] {
+  return [...periodo.matchAll(/(?:(\d{2})\/)?(\d{4})/g)].map(([, mes, ano]) => ({
+    inicio: Number(ano) * 12 + (mes ? Number(mes) - 1 : 0),
+    fim: Number(ano) * 12 + (mes ? Number(mes) - 1 : 11),
+  }));
+}
+
+// "2014 - 2018" → 60 meses (contando as pontas). Um ano sozinho não diz a duração.
 function meses(periodo: string): number | null {
-  const datas = [...periodo.toLowerCase().matchAll(/([a-zç]{3})\.?\s*(?:de\s*)?(\d{4})/g)]
-    .map(([, mes, ano]) => ({ mes: MESES.indexOf(mes), ano: Number(ano) }))
-    .filter((d) => d.mes >= 0);
-  if (datas.length === 2) return (datas[1].ano - datas[0].ano) * 12 + datas[1].mes - datas[0].mes + 1;
-  const anos = periodo.match(/\d{4}/g);
-  return anos?.length === 2 ? (Number(anos[1]) - Number(anos[0]) + 1) * 12 : null;
+  const d = datas(periodo);
+  return d.length === 2 ? d[1].fim - d[0].inicio + 1 : null;
 }
 
-// Tira os travessões do PDF: "mar. de 2025 – mai. de 2025" vira "mar. de 2025 a mai. de 2025".
-const semTravessao = (t: string) => t.replace(/\s*[–—]\s*|\s+-\s+/g, ' a ');
-const nomeLimpo = (t: string) => t.replace(/\s*[–—]\s*/g, ', ');
-// Fim do período como número (ano * 12 + mês) para ordenar. Só o ano conta como dezembro.
+// Fim do período para ordenar da mais recente para a mais antiga.
 export function fimDoPeriodo(periodo: string): number {
-  const datas = [...periodo.toLowerCase().matchAll(/([a-zç]{3})\.?\s*(?:de\s*)?(\d{4})/g)]
-    .filter(([, mes]) => MESES.includes(mes))
-    .map(([, mes, ano]) => Number(ano) * 12 + MESES.indexOf(mes));
-  if (datas.length) return datas.at(-1)!;
-  const ano = periodo.match(/\d{4}/g)?.at(-1);
-  return ano ? Number(ano) * 12 + 11 : 0;
+  return datas(periodo).at(-1)?.fim ?? 0;
 }
 
+// Tira os travessões do PDF: "01/2024 - 11/2024" vira "01/2024 a 11/2024".
+const semTravessao = (t: string) => t.replace(/\s*[–—]\s*|\s+-\s+/g, ' a ');
+const temData = (t: string) => /\d{4}/.test(t);
 const partes = (linha: string) => linha.split('|').map((p) => p.trim()).filter(Boolean);
 
 let cache: Promise<Curriculo> | null = null;
@@ -63,9 +68,10 @@ export function curriculo() {
   return cache;
 }
 
+// Lê só as seções que o site mostra, na ordem em que estão no PDF.
 async function ler(): Promise<Curriculo> {
   const r: Curriculo = { formacao: [], cursos: [], experiencias: [] };
-  let secao: (typeof SECOES)[keyof typeof SECOES] | null = null;
+  let secao: (typeof SECOES)[keyof typeof SECOES] = null;
 
   for (const linha of await linhas()) {
     if (linha in SECOES) {
@@ -75,43 +81,31 @@ async function ler(): Promise<Curriculo> {
     const cabecalho = linha.includes('|');
 
     if (secao === 'formacao' && cabecalho) {
-      const [titulo, periodo] = partes(linha);
-      const [curso, ...resto] = titulo.split(' - ');
-      r.formacao.push({ curso: curso.trim(), instituicao: resto.join(' - ').replace(/\s+,/g, ',').trim(), periodo: semTravessao(periodo) });
-    } else if (secao === 'cursos') {
-      if (cabecalho) {
-        const [nome, periodo] = partes(linha);
-        r.cursos.push({ nome: nomeLimpo(nome), periodo: semTravessao(periodo), itens: [], meses: meses(periodo) });
-      } else {
-        const curso = r.cursos.at(-1);
-        if (!curso) continue;
-        const marcador = /^[●•▪-]\s*/;
-        // Linha sem marcador continua o item anterior.
-        if (marcador.test(linha) || !curso.itens.length) curso.itens.push(linha.replace(marcador, ''));
-        else curso.itens[curso.itens.length - 1] += ` ${linha}`;
-      }
+      const [curso, instituicao, periodo = ''] = partes(linha);
+      r.formacao.push({ curso, instituicao, periodo: semTravessao(periodo) });
+    } else if (secao === 'cursos' && cabecalho) {
+      const [nome, instituicao, periodo = ''] = partes(linha);
+      r.cursos.push({ nome, instituicao, periodo: semTravessao(periodo), meses: meses(periodo) });
     } else if (secao === 'experiencias') {
-      if (cabecalho) {
+      const exp = r.experiencias.at(-1);
+      if (cabecalho && exp && !exp.periodo) {
+        // Linha abaixo de "Cargo | Empresa": "Programa | 1ª edição: 06/2025 | 2ª edição: ...".
         const p = partes(linha);
-        const periodo = p.pop()!;
-        const [cargo, empresa] = p.length > 1 ? [p[1], p[0]] : [p[0], null];
-        r.experiencias.push({ cargo, empresa, periodo: semTravessao(periodo), texto: '' });
-      } else {
-        const exp = r.experiencias.at(-1);
-        if (exp) exp.texto = `${exp.texto} ${linha}`.trim();
+        if (!temData(p[0])) exp.detalhe = p.shift()!;
+        exp.periodo = semTravessao(p.join(' · '));
+      } else if (cabecalho) {
+        // "Cargo | Empresa | período" (o período pode vir na linha de baixo).
+        const p = partes(linha);
+        const periodo = temData(p.at(-1)!) ? p.pop()! : '';
+        r.experiencias.push({ cargo: p[0], empresa: p[1] ?? null, detalhe: null, periodo: semTravessao(periodo), itens: [] });
+      } else if (exp) {
+        const marcador = /^[●•▪-]\s*/;
+        // Linha sem marcador continua o item anterior (texto que quebrou de linha no PDF).
+        if (marcador.test(linha) || !exp.itens.length) exp.itens.push(linha.replace(marcador, ''));
+        else exp.itens[exp.itens.length - 1] += ` ${linha}`;
       }
     }
   }
-  // Experiências que não cabem no PDF (src/data/experiencias-extras.json) entram junto,
-  // e tudo fica do mais recente para o mais antigo pelo último ano do período.
-  const ultimoAno = (e: Experiencia) => Number(e.periodo.match(/\d{4}/g)?.at(-1) ?? 0);
-  const doPdf = new Set(r.experiencias.map((e) => `${e.cargo}|${e.periodo}`));
-  r.experiencias.push(
-    ...(extras as Experiencia[])
-      .map((e) => ({ ...e, periodo: semTravessao(e.periodo) }))
-      .filter((e) => !doPdf.has(`${e.cargo}|${e.periodo}`)),
-  );
-  r.experiencias.sort((a, b) => ultimoAno(b) - ultimoAno(a));
   return r;
 }
 

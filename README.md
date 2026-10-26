@@ -20,3 +20,5 @@ Pronto. O jogo aparece no site em ordem de data.
 ## Atualizar o currículo
 
 Troque o arquivo `public/curriculo-gabriel-torres.pdf`. As Experiências e as Conquistas do site são lidas dele.
+
+O site lê as seções `EXPERIÊNCIA`, `FORMAÇÃO ACADÊMICA` e `CURSOS`, com cabeçalhos no formato `Nome | Lugar | período` (datas em `MM/AAAA` ou `AAAA`). Na Experiência, o período pode vir numa linha de baixo (`Programa | 1ª edição: 06/2025 | ...`) e cada `•` vira um item da lista.

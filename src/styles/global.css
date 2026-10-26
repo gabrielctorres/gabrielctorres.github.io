@@ -9,9 +9,9 @@
   --texto: #c9cdd6;
   --texto-forte: #eef0f4;
   --texto-suave: #8a91a1;
-  --ambar: #f2b544;
-  --ambar-claro: #ffd27a;
-  --sobre-ambar: #101217;
+  --destaque: #9be15d;
+  --destaque-claro: #b8ee86;
+  --sobre-destaque: #101217;
   --foco: #eef0f4;
   --erro: #ff9b8a;
 
@@ -19,17 +19,17 @@
   --comum: #a3aab8;
   --rara: #6fb1f2;
   --epica: #b794f6;
-  --lendaria: var(--ambar);
+  --lendaria: var(--destaque);
 
   --fonte-titulo: 'Press Start 2P', ui-monospace, monospace;
-  --fonte-ui: 'Silkscreen', ui-monospace, monospace;
-  --fonte-texto: 'Rubik Variable', 'Segoe UI', system-ui, sans-serif;
+  --fonte-ui: 'Space Mono', ui-monospace, monospace;
+  --fonte-texto: 'Nunito Sans Variable', 'Segoe UI', system-ui, sans-serif;
   /* Peso e ajuste dos títulos: a Press Start 2P só tem 400 e é larga; fontes comuns pedem 700 e um tamanho maior. */
   --peso-titulo: 400;
   --ajuste-titulo: none;
 
   --px: 4px; /* espessura de borda: um pixel do console */
-  --sombra: 6px 6px 0 var(--ambar);
+  --sombra: 6px 6px 0 var(--destaque);
   --sombra-botao: 4px 4px 0 var(--borda);
   --margem: clamp(16px, 3vw, 40px);
   --hud-h: 64px;
@@ -69,8 +69,8 @@ body {
 }
 
 ::selection {
-  background: var(--ambar);
-  color: var(--sobre-ambar);
+  background: var(--destaque);
+  color: var(--sobre-destaque);
 }
 
 img,
@@ -92,7 +92,7 @@ a {
 }
 
 a:hover {
-  color: var(--ambar-claro);
+  color: var(--destaque-claro);
 }
 
 p {
@@ -132,8 +132,8 @@ textarea {
   top: -100px;
   z-index: 100;
   padding: 12px 16px;
-  background: var(--ambar);
-  color: var(--sobre-ambar);
+  background: var(--destaque);
+  color: var(--sobre-destaque);
   font-family: var(--fonte-ui);
   text-decoration: none;
 }
@@ -183,7 +183,7 @@ textarea {
 }
 
 .hud-nome .icone {
-  color: var(--ambar);
+  color: var(--destaque);
 }
 
 .hud-direita {
@@ -221,14 +221,14 @@ textarea {
 }
 
 .hud-cv {
-  background: var(--ambar);
-  color: var(--sobre-ambar);
+  background: var(--destaque);
+  color: var(--sobre-destaque);
 }
 
 .hud-cv:hover {
-  background: var(--ambar-claro);
-  border-color: var(--ambar-claro);
-  color: var(--sobre-ambar);
+  background: var(--destaque-claro);
+  border-color: var(--destaque-claro);
+  color: var(--sobre-destaque);
 }
 
 /* ---------- Console: coluna lateral + tela ---------- */
@@ -277,7 +277,7 @@ textarea {
   font-family: var(--fonte-ui);
   font-size: 14px;
   line-height: 1.5;
-  color: var(--ambar);
+  color: var(--destaque);
   text-transform: uppercase;
 }
 
@@ -313,7 +313,7 @@ textarea {
 }
 
 .menu .icone {
-  color: var(--ambar-claro);
+  color: var(--destaque-claro);
   opacity: 0;
   transform: translateX(-6px);
   transition: opacity 120ms steps(2), transform 120ms steps(2);
@@ -334,18 +334,18 @@ textarea {
 }
 
 .menu a[aria-current='page'] {
-  background: var(--ambar);
-  border-color: var(--ambar);
-  color: var(--sobre-ambar);
+  background: var(--destaque);
+  border-color: var(--destaque);
+  color: var(--sobre-destaque);
 }
 
 .menu a[aria-current='page'] .icone {
-  color: var(--sobre-ambar);
+  color: var(--sobre-destaque);
 }
 
 .menu a[aria-current='page']:hover {
-  background: var(--ambar-claro);
-  border-color: var(--ambar-claro);
+  background: var(--destaque-claro);
+  border-color: var(--destaque-claro);
 }
 
 .tela {
@@ -472,7 +472,7 @@ kbd {
 .titulo-secao {
   font-size: 14px;
   line-height: 1.6;
-  color: var(--ambar);
+  color: var(--destaque);
 }
 
 .caixa {
@@ -512,16 +512,16 @@ kbd {
 }
 
 .botao-primario {
-  border-color: var(--ambar);
-  background: var(--ambar);
-  color: var(--sobre-ambar);
+  border-color: var(--destaque);
+  background: var(--destaque);
+  color: var(--sobre-destaque);
   box-shadow: var(--sombra-botao);
 }
 
 .botao-primario:hover {
-  border-color: var(--ambar-claro);
-  background: var(--ambar-claro);
-  color: var(--sobre-ambar);
+  border-color: var(--destaque-claro);
+  background: var(--destaque-claro);
+  color: var(--sobre-destaque);
 }
 
 /* Apertar o botão: ele afunda no lugar da sombra, como um botão de borracha. */
@@ -537,7 +537,7 @@ kbd {
   font-family: var(--fonte-ui);
   font-size: 14px;
   line-height: 1.4;
-  color: var(--ambar);
+  color: var(--destaque);
   text-transform: uppercase;
 }
 
@@ -545,7 +545,7 @@ kbd {
   content: '';
   width: 10px;
   height: 10px;
-  background: var(--ambar);
+  background: var(--destaque);
   animation: piscar 1.2s steps(1) infinite;
 }
 
@@ -589,8 +589,8 @@ kbd {
   top: 10px;
   z-index: 2;
   padding: 4px 8px;
-  background: var(--ambar);
-  color: var(--sobre-ambar);
+  background: var(--destaque);
+  color: var(--sobre-destaque);
   font-family: var(--fonte-ui);
   font-size: 12px;
   line-height: 1.4;
@@ -698,7 +698,7 @@ kbd {
 }
 
 .cartucho[aria-pressed='true'] {
-  border-color: var(--ambar);
+  border-color: var(--destaque);
 }
 
 .cartucho[aria-pressed='true'] img {
@@ -707,12 +707,12 @@ kbd {
 }
 
 .cartucho[aria-pressed='true'] .cartucho-texto {
-  background: var(--ambar);
-  color: var(--sobre-ambar);
+  background: var(--destaque);
+  color: var(--sobre-destaque);
 }
 
 .cartucho[aria-pressed='true'] .cartucho-num {
-  color: var(--sobre-ambar);
+  color: var(--sobre-destaque);
 }
 
 /* ---------- Página do jogo ---------- */
@@ -769,8 +769,8 @@ kbd {
 }
 
 .miniatura[aria-pressed='true'] {
-  border-color: var(--ambar);
-  color: var(--ambar);
+  border-color: var(--destaque);
+  color: var(--destaque);
 }
 
 .galeria-item[hidden] {
@@ -838,7 +838,7 @@ kbd {
 }
 
 .prosa li::marker {
-  color: var(--ambar);
+  color: var(--destaque);
 }
 
 .prosa h2 + p {
@@ -862,7 +862,7 @@ kbd {
 
 .lista-feitos .icone {
   margin-top: 0.45em;
-  color: var(--ambar);
+  color: var(--destaque);
 }
 
 .ficha {
@@ -1001,7 +1001,7 @@ kbd {
 
 .inventario .icone-app {
   flex: none;
-  color: var(--ambar);
+  color: var(--destaque);
 }
 
 .inventario .item-nome {
@@ -1039,7 +1039,7 @@ kbd {
 }
 
 .saves li:first-child .quando {
-  color: var(--ambar);
+  color: var(--destaque);
 }
 
 .saves a {
@@ -1074,17 +1074,22 @@ kbd {
 }
 
 .experiencia.atual {
-  border-color: var(--ambar);
+  border-color: var(--destaque);
 }
 
 .experiencia.atual .rotulo {
-  color: var(--ambar);
+  color: var(--destaque);
 }
 
 .experiencia-texto {
   max-width: 72ch;
   font-size: 15px;
   line-height: 1.65;
+}
+
+ul.experiencia-texto {
+  margin: 0;
+  padding-left: 1.2em;
 }
 
 .fonte-curriculo {
@@ -1158,7 +1163,7 @@ kbd {
 }
 
 a.conquista:hover {
-  border-color: var(--ambar);
+  border-color: var(--destaque);
   color: inherit;
 }
 
@@ -1172,8 +1177,8 @@ a.conquista:hover {
   justify-content: center;
   width: 60px;
   height: 60px;
-  border: var(--px) solid var(--cor-raridade, var(--ambar));
-  color: var(--cor-raridade, var(--ambar));
+  border: var(--px) solid var(--cor-raridade, var(--destaque));
+  color: var(--cor-raridade, var(--destaque));
 }
 
 .conquista-raridade {
@@ -1198,7 +1203,7 @@ a.conquista:hover {
 
 .conquista.raridade-lendaria .conquista-icone {
   background: var(--lendaria);
-  color: var(--sobre-ambar);
+  color: var(--sobre-destaque);
 }
 
 .conquista.raridade-lendaria .conquista-nome {
@@ -1292,7 +1297,7 @@ a.conquista:hover {
   border-radius: 0;
   color: var(--texto-forte);
   font-size: 16px;
-  caret-color: var(--ambar);
+  caret-color: var(--destaque);
 }
 
 .campo textarea {
@@ -1308,7 +1313,7 @@ a.conquista:hover {
 .campo input:focus-visible,
 .campo textarea:focus-visible {
   outline: none;
-  border-color: var(--ambar);
+  border-color: var(--destaque);
 }
 
 .campo [aria-invalid='true'] {
@@ -1329,7 +1334,7 @@ a.conquista:hover {
   flex-direction: column;
   gap: 10px;
   padding: 16px;
-  border: var(--px) solid var(--ambar);
+  border: var(--px) solid var(--destaque);
 }
 
 .aviso[hidden] {
@@ -1343,7 +1348,7 @@ a.conquista:hover {
   font-size: 12px;
   font-weight: 400;
   line-height: 1.6;
-  color: var(--ambar);
+  color: var(--destaque);
 }
 
 .atalhos {
@@ -1400,7 +1405,7 @@ a.conquista:hover {
 }
 
 .copiar:hover {
-  border-color: var(--ambar);
+  border-color: var(--destaque);
   color: var(--texto-forte);
 }
 
@@ -1417,7 +1422,7 @@ a.conquista:hover {
 .fim-de-jogo h1 {
   font-size: clamp(22px, 3vw + 8px, 36px);
   line-height: 1.3;
-  color: var(--ambar);
+  color: var(--destaque);
 }
 
 /* ---------- Responsivo ---------- */
