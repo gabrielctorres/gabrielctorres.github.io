@@ -15,10 +15,10 @@
   --foco: #eef0f4;
   --erro: #ff9b8a;
 
-  /* Raridade das conquistas, do jeito que os jogos costumam pintar. */
-  --comum: #a3aab8;
-  --rara: #6fb1f2;
-  --epica: #b794f6;
+  /* Raridade das conquistas: sobe do grafite para o lima, sem segunda cor de destaque. */
+  --comum: var(--texto-suave);
+  --rara: var(--texto-forte);
+  --epica: var(--destaque-claro);
   --lendaria: var(--destaque);
 
   --fonte-titulo: 'Press Start 2P', ui-monospace, monospace;

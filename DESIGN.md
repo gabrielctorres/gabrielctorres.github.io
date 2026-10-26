@@ -16,9 +16,9 @@ colors:
   sobre-destaque: "#101217"
   foco: "#EEF0F4"
   erro: "#FF9B8A"
-  comum: "#A3AAB8"
-  rara: "#6FB1F2"
-  epica: "#B794F6"
+  comum: "#8A91A1"
+  rara: "#EEF0F4"
+  epica: "#B8EE86"
   lendaria: "#9BE15D"
 typography:
   titulo-pagina:
@@ -140,9 +140,9 @@ Escuro frio e neutro, com um verde-lima reservado.
 - **Lima #9BE15D**: cartucho selecionado, item atual do menu, botão primário, currículo, status piscante, títulos de seção. **Lima claro #B8EE86**: hover.
 - **Foco #EEF0F4**: contorno de 3 px com afastamento de 3 px. Fica claro ao lado do lima da seleção.
 
-- **Raridade** (só nas Conquistas): comum #A3AAB8, rara #6FB1F2, épica #B794F6, lendária lima. Sempre com o nome da raridade escrito ao lado, nunca só a cor.
+- **Raridade** (só nas Conquistas): escala do grafite ao lima: comum #8A91A1, rara #EEF0F4, épica #B8EE86 (lima claro), lendária lima. Sempre com o nome da raridade escrito ao lado, nunca só a cor.
 
-Proibido: segunda cor de destaque fora das raridades, gradientes decorativos, rosa.
+Proibido: segunda cor de destaque (nem nas raridades), gradientes decorativos, rosa.
 
 ## Typography
 
@@ -164,7 +164,7 @@ Não há sombra suave. Profundidade = plano (fundo → painel → painel alto) +
 - **Cartucho**: botão com miniatura e "01 Nome". Fora de seleção: imagem esmaecida e dessaturada. Selecionado: borda e rótulo lima.
 - **Botões**: primário lima com sombra de 4 px que some ao apertar (`translate(4px, 4px)`); secundário só com borda. Ícone de link externo quando sai do site.
 - **Caixa**: painel + borda 4 px, para textos e fichas.
-- **Conquista**: formação e cursos do currículo. Raridade pinta borda, ícone e rótulo: comum #A3AAB8 (borda neutra), rara #6FB1F2, épica #B794F6 (+ sombra 4 px roxa), lendária lima (+ sombra 6 px lima, ícone preenchido). A bloqueada tem borda tracejada e leva ao contato.
+- **Conquista**: formação e cursos do currículo. Raridade pinta borda, ícone e rótulo: comum #8A91A1 (borda neutra), rara #EEF0F4, épica #B8EE86 (+ sombra 4 px lima claro), lendária lima (+ sombra 6 px lima, ícone preenchido). A bloqueada tem borda tracejada e leva ao contato.
 - **Wishlist**: cartão do Playground Rumble embaixo do menu lateral (capa, status, nome, uma frase e o botão lima "Wishlist na Steam"). No celular aparece só no início, compacto, com a capa ao lado.
 - **Experiência**: caixa com cargo, empresa · período e o texto do currículo; a mais recente tem borda lima.
 - **Ícones**: só pixel art desenhada em grade (`src/components/Icone.astro`). Nada de emoji nem glifo Unicode como ícone.
